@@ -9,6 +9,30 @@
     <link rel="stylesheet" href="flashCard.css">
 </head>
 <body>
+<div id="main">
+    <div id="card">
+        <div id="cardContent">
+            <h1>Title</h1>
+            <hr>
+            <p>Content here question and everything else</p>
+            <hr>
+            <p>Answer side, needs to be on back</p>
+        </div>
+    </div>
+    <div id="cycle">
+        <button class="cycleThrough">Next</button>
+        <button class="cycleThrough">Complete</button>
+        <button class="cycleThrough">Pin</button>
+    </div>
+</div>
+<div id="finishedArea">
+    <div class="storedCards" id="completed">
+completed cards go here
+    </div>
+    <div class="storedCards" id="pinned">
+pinned cards here
+    </div>
+</div>
 
 <script src="jQ.js"></script>
 <script src="CRUD.js"></script>
