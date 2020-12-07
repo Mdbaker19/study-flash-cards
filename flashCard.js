@@ -17,5 +17,17 @@ $(document).ready(function (){
       }
    }
 
+   $("#cardContent").hover( function (){
+      $(this).css({
+         "transform": "rotateY(180deg)",
+         "transition": "transform 2s"
+      });
+   }, function (){
+      $(this).css({
+         "transform": "revert",
+         "transition": "transform 2s"
+      });
+   });
+
 
 });
