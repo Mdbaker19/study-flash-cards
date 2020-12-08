@@ -9,9 +9,34 @@
     <link rel="stylesheet" href="flashCard.css">
 </head>
 <body>
+
+<div id="newCardModal">
+    <button id="closeNewCardModal">X</button>
+    <label>
+        Title
+        <input id="newCardTitle">
+    </label>
+    <label>
+        Category
+        <input id="newCardCategory">
+    </label>
+    <label>
+        Content
+        <textarea id="newCardQuestion" rows="10" cols="25">
+        </textarea>
+    </label>
+    <label>
+        Answer
+        <input id="newCardAnswer">
+    </label>
+    <button id="submitNewCard">Submit</button>
+</div>
+
 <div id="main">
+    <button id="addCard">Add new Card</button>
     <div id="card">
         <div id="cardContent">
+            <h6 id="categoryOfCard">Category</h6>
             <h1>Title</h1>
             <hr>
             <p>Content here question and everything else</p>
@@ -20,11 +45,13 @@
         </div>
     </div>
     <div id="cycle">
-        <button class="cycleThrough">Next</button>
-        <button class="cycleThrough">Complete</button>
-        <button class="cycleThrough">Pin</button>
+        <button class="cycleThrough" id="nextCard">Next</button>
+        <button class="cycleThrough" id="addToComplete">Complete</button>
+        <button class="cycleThrough" id="addToPin">Pin</button>
     </div>
 </div>
+
+
 <div id="finishedArea">
     <div class="storedCards" id="completed">
         <h5>Cards that you know the answer to, <em>Completed</em>, go here</h5>
