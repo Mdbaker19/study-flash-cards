@@ -43,7 +43,6 @@ $(document).ready(function (){
                    <hr>
                    <p>${cardObj.question}</p>
                    <hr>
-                   <p>${cardObj.answer}</p>
               </div>`
    }
 
@@ -57,17 +56,28 @@ $(document).ready(function (){
 
 
 
-
+   let currentText;
    $("#card").hover( function (){
+      currentText = $(this).children().html();
+      $(this).css({
+         "transform": "rotateY(180deg)",
+         "transition": "transform 2s"
+      });
       $(this).children().css({
          "transform": "rotateY(180deg)",
          "transition": "transform 2s"
       });
+      $(this).children().html("answer here");//if i can find a way to pull that out from the current cards.answer
    }, function (){
       $(this).children().css({
          "transform": "revert",
          "transition": "transform 2s"
       });
+      $(this).css({
+         "transform": "revert",
+         "transition": "transform 2s"
+      });
+      $(this).children().html(currentText);
    });
 
 
@@ -91,6 +101,23 @@ $(document).ready(function (){
    function modalFadeOut(){
       $("#newCardModal").fadeOut(500);
    }
+
+
+   $("#addToComplete").on("click", function(){
+      console.log("click");
+      console.log(currentText);
+      // $("#completed").insertAdjacentHTML("afterbegin", currentText);// not working
+      $("#completed").html(currentText);
+   });
+
+
+
+
+
+
+
+
+
 
 
 
