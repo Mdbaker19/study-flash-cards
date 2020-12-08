@@ -68,6 +68,7 @@ button:hover{
     background-color: #F7F7FF;
     color: black;
     height: 50%;
+    width: 75%;
     justify-content: space-around;
 }
 hr{
@@ -112,4 +113,13 @@ button:hover{
     width: 45%;
     display: flex;
     justify-content: center;
+}
+.storedCards::-webkit-scrollbar{
+    width: .25rem;
+}
+.storedCards::-webkit-scrollbar-track{
+    background: gray;
+}
+.storedCards::-webkit-scrollbar-thumb{
+    background: black;
 }

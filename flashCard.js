@@ -4,13 +4,17 @@ $(document).ready(function (){
        .then(r => r.json())
        .then(d => {
           allCards = d;
-          console.log(d)
+          console.log(d);
+          $("#card").html(render(allCards[0]));
        });
 
    function recallCards(){
       fetch(baseURL)
           .then( r => r.json())
-          .then( d => console.log(d));
+          .then( d => {
+             allCards = d;
+             console.log(d)
+          });
    }
 
    function createNewCard(title, question, answer, category){
@@ -24,12 +28,12 @@ $(document).ready(function (){
 
    let count = 0;
    $("#nextCard").on("click", function (){
-      $("#card").html(render(allCards[count]));//will work on this
-      if(count < allCards.length) {
-         count++;
-      } else {
-         count = 0;//not working right now
+      count++;
+      if(count > allCards.length - 1) {
+         count = 0;
       }
+      $("#card").html(render(allCards[count]));//will work on this
+      console.log(count);
    });
 
    function render(cardObj){
@@ -54,34 +58,39 @@ $(document).ready(function (){
 
 
 
-   $("#cardContent").hover( function (){
-      $(this).css({
+   $("#card").hover( function (){
+      $(this).children().css({
          "transform": "rotateY(180deg)",
          "transition": "transform 2s"
       });
    }, function (){
-      $(this).css({
+      $(this).children().css({
          "transform": "revert",
          "transition": "transform 2s"
       });
    });
 
+
+
+
    $("#addCard").on("click", function (){
       $("#newCardModal").css("display", "flex");
       $("#closeNewCardModal").on("click", function (){
-         $("#newCardModal").fadeOut(500);
+         modalFadeOut();
       });
       let newCardTitle = $("#newCardTitle");
       let newCardCategory = $("#newCardCategory");
       let newCardQuestion = $("#newCardQuestion");
       let newCardAnswer = $("#newCardAnswer");
       $("#submitNewCard").on("click", function (){
-         addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val())).then(console.log);
-         recallCards();
+         addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val())).then(recallCards);
+         modalFadeOut();
       });
    });
 
-
+   function modalFadeOut(){
+      $("#newCardModal").fadeOut(500);
+   }
 
 
 
