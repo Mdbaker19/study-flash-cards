@@ -4,7 +4,9 @@
     padding: 0;
 }
 body{
-    background-color: #2E0E02;
+    background-color: black;
+    font-family: 'Poppins', sans-serif;
+
 }
 #main{
     width: 100vw;
@@ -17,19 +19,23 @@ body{
 #card{
     height: 90%;
     width: 50%;
-    background-color: #033F63;
+    background-color: darkgoldenrod;
     color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+
 }
 
 
 
 #addCard{
     align-self: flex-start;
+    font-family: 'Poppins', sans-serif;
+
 }
 #newCardModal{
     position: absolute;
@@ -43,12 +49,20 @@ body{
     min-height: fit-content;
     width: 50vw;
     border: 5px solid black;
-    background-color: aliceblue;
+    background-color: dimgrey;
+    z-index: 1;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+
+}
+#newCardTitle, #newCardCategory, #newCardQuestion, #newCardAnswer {
+    background: lightgrey;
 }
 #submitNewCard{
     position: absolute;
     bottom: 0;
     width: 100%;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -57,6 +71,8 @@ body{
 
 #categoryOfCard{
     align-self: flex-start;
+    font-family: 'Poppins', sans-serif;
+
 }
 #cardContent{
     display: flex;
@@ -88,9 +104,11 @@ hr{
     background-color: black;
 }
 .cycleThrough{
-    background-color: #033F63;
-    color: aliceblue;
-    border-radius: 5px;
+    background-color: whitesmoke;
+    color: black;
+    font-weight: bold;
+    border-radius: 3px;
+    border-color: goldenrod;
 }
 button:hover{
     cursor: pointer;
@@ -111,11 +129,11 @@ button:hover{
     margin: 0 2.5%;
 }
 #completed{
-    background-color: #57CC99;
+    background-color: gray;
     margin-right: 2.5%;
 }
 #pinned{
-    background-color: #38A3A5;
+    background-color: darkgray;
     margin-left: 2.5%;
 }
 .storedCards{
@@ -131,8 +149,8 @@ button:hover{
     width: .25rem;
 }
 .storedCards::-webkit-scrollbar-track{
-    background: gray;
+    background: darkgoldenrod;
 }
 .storedCards::-webkit-scrollbar-thumb{
-    background: black;
+    background: darkgoldenrod;
 }
