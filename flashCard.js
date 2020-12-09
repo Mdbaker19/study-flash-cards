@@ -83,7 +83,9 @@ $(document).ready(function (){
 
 
 
+   let modalOpen = false;
    $("#addCard").on("click", function (){
+      modalOpen = true;
       $("#newCardModal").css("display", "flex");
       $("#closeNewCardModal").on("click", function (){
          modalFadeOut();
@@ -103,18 +105,46 @@ $(document).ready(function (){
    }
 
 
+   let completedArea = document.getElementById("completed");
    $("#addToComplete").on("click", function(){
-      console.log("click");
-      console.log(currentText);
-      // $("#completed").insertAdjacentHTML("afterbegin", currentText);// not working
-      $("#completed").html(currentText);
+      completedArea.insertAdjacentHTML("beforeend", currentText);// need to use something other than currentText
+   });
+
+   let pinnedArea = document.getElementById("pinned");
+   $("#addToPin").on("click", function (){
+      pinnedArea.insertAdjacentHTML("beforeend", currentText);
    });
 
 
 // to-do:
 //    add keypress event for esc key on the add new card modal
+   window.addEventListener("keydown", function (e){
+      if(e.key === "Escape" && modalOpen){
+         modalFadeOut();
+      }
+   });
 
 
+
+
+
+
+   function singLyrics(lyrics, pitch) {
+      return new Promise((res) => {
+         var lyric = new SpeechSynthesisUtterance(lyrics);
+         lyric.pitch = pitch;
+         lyric.rate = .5;
+         speechSynthesis.speak(lyric);
+         setTimeout(res, 1000);
+      });
+   }
+
+   const singPromises = () => {
+      let text = $("#card").children()[0].innerText
+      return singLyrics(text, 1.5);
+   };
+
+   document.getElementById('readCard').addEventListener('click', singPromises);
 
 
 
