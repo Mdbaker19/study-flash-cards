@@ -133,7 +133,7 @@ $(document).ready(function (){
 
     let completedArea = document.getElementById("completed");
     $("#addToComplete").on("click", function(){
-        completedArea.insertAdjacentHTML("beforeend", currentCardContent);// need to use something other than
+        completedArea.insertAdjacentHTML("beforeend", currentCardContent);
     });
 
     let pinnedArea = document.getElementById("pinned");
@@ -143,26 +143,26 @@ $(document).ready(function (){
 
 
 
-    function singLyrics(lyrics, pitch) {
+    function voiceReader(input, pitch) {
         return new Promise((res) => {
-            const lyric = new SpeechSynthesisUtterance(lyrics);
-            lyric.pitch = pitch;
-            lyric.rate = .8;
-            speechSynthesis.speak(lyric);
+            const voice = new SpeechSynthesisUtterance(input);
+            voice.pitch = pitch;
+            voice.rate = .8;
+            speechSynthesis.speak(voice);
             setTimeout(res, 1000);
         });
     }
 
-    const singPromises = () => {
+    const readCard = () => {
         let text = $("#card").children()[0].innerText
-        return singLyrics(text, 1.2);
+        return voiceReader(text, 1.2);
     };
 
     let clickCountOfVoice = 0;
     document.getElementById('readCard').addEventListener('click', function (){
         clickCountOfVoice++;
         if(clickCountOfVoice % 2 !== 0) {
-            singPromises();
+            readCard();
         } else {
             speechSynthesis.cancel();
         }
