@@ -111,9 +111,8 @@ $(document).ready(function (){
    });
 
 
-
-
-
+// to-do:
+//    add keypress event for esc key on the add new card modal
 
 
 
