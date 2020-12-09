@@ -17,12 +17,13 @@ $(document).ready(function (){
             });
     }
 
-    function createNewCard(title, question, answer, category){
+    function createNewCard(title, question, answer, category, code){
         return {
             title: title,
             question: question,
             answer: answer,
-            category: category
+            category: category,
+            code: code
         }
     }
 
@@ -46,6 +47,7 @@ $(document).ready(function (){
                                         <div class="flip-card-front">
                                             <h1>${cardObj.title}</h1>
                                             <pre>${cardObj.question}</pre>
+                                            <pre>${cardObj.code}</pre>
                                         </div>
                                         <div class="flip-card-back">
                                             <h1>Answer</h1>
@@ -59,6 +61,7 @@ $(document).ready(function (){
                        <div class="flip-card-front">
                            <h1>${cardObj.title}</h1>
                            <pre>${cardObj.question}</pre>
+                           <pre>${cardObj.code}</pre>
                        </div>
                        <div class="flip-card-back">
                            <h1>Answer</h1>
@@ -109,8 +112,9 @@ $(document).ready(function (){
         let newCardCategory = $("#newCardCategory");
         let newCardQuestion = $("#newCardQuestion");
         let newCardAnswer = $("#newCardAnswer");
+        let newCardCode = $("#newCardCode");
         $("#submitNewCard").on("click", function (){
-            addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val())).then(recallCards);
+            addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val(), newCardCode.val())).then(recallCards);
             modalFadeOut();
         });
     });
