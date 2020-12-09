@@ -6,15 +6,24 @@
 body{
     background-color: black;
     font-family: 'Poppins', sans-serif;
-
+    overflow-x: hidden;
+}
+body::-webkit-scrollbar{
+    width: .25rem;
+}
+body::-webkit-scrollbar-track{
+    background: darkgoldenrod;
+}
+body::-webkit-scrollbar-thumb{
+    background: darkgoldenrod;
 }
 #main{
-    width: 100vw;
+    width: 95vw;
     height: 50vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2.5vh 0;
+    margin: 2.5vh 2.5vw;
 }
 #card{
     height: 90%;
@@ -35,8 +44,13 @@ body{
 #addCard{
     align-self: flex-start;
     font-family: 'Poppins', sans-serif;
-
 }
+#readCard{
+    align-self: flex-end;
+    font-family: 'Poppins', sans-serif;
+}
+
+
 #newCardModal{
     position: absolute;
     top: 20vh;
@@ -143,7 +157,7 @@ button:hover{
     width: 45%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 .storedCards::-webkit-scrollbar{
     width: .25rem;
