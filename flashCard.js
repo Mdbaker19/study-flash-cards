@@ -1,19 +1,17 @@
 $(document).ready(function (){
    let allCards = [];
    fetch(baseURL)
-       .then(r => r.json())
-       .then(d => {
-          allCards = d;
-          console.log(d);
+       .then(res => res.json())
+       .then(data => {
+          allCards = data;
           $("#card").html(render(allCards[0]));
        });
 
    function recallCards(){
       fetch(baseURL)
-          .then( r => r.json())
-          .then( d => {
-             allCards = d;
-             console.log(d)
+          .then( res => res.json())
+          .then( data => {
+             allCards = data;
           });
    }
 
@@ -32,8 +30,7 @@ $(document).ready(function (){
       if(count > allCards.length - 1) {
          count = 0;
       }
-      $("#card").html(render(allCards[count]));//will work on this
-      console.log(count);
+      $("#card").html(render(allCards[count]));
    });
 
    function render(cardObj){
@@ -57,28 +54,35 @@ $(document).ready(function (){
 
 
    let currentText;
+   let currentCard;
    $("#card").hover( function (){
-      currentText = $(this).children().html();
+      currentCard = $("#cardContent");
+      currentText = currentCard.html();
       $(this).css({
          "transform": "rotateY(180deg)",
-         "transition": "transform 2s"
+         "transition": "transform 1s"
       });
       $(this).children().css({
          "transform": "rotateY(180deg)",
-         "transition": "transform 2s"
+         "transition": "transform 1s"
       });
-      $(this).children().html("answer here");//if i can find a way to pull that out from the current cards.answer
+      setTimeout(function (){
+         currentCard.html(allCards[count].answer);
+      }, 250);
    }, function (){
       $(this).children().css({
          "transform": "revert",
-         "transition": "transform 2s"
+         "transition": "transform 1s"
       });
       $(this).css({
          "transform": "revert",
-         "transition": "transform 2s"
+         "transition": "transform 1s"
       });
-      $(this).children().html(currentText);
+      setTimeout(function (){
+         currentCard.html(currentText);
+      }, 250);
    });
+
 
 
 
@@ -100,9 +104,21 @@ $(document).ready(function (){
       });
    });
 
+
    function modalFadeOut(){
       $("#newCardModal").fadeOut(500);
    }
+
+   // to-do:
+   //    add keypress event for esc key on the add new card modal
+   window.addEventListener("keydown", function (e){
+      if(e.key === "Escape" && modalOpen){
+         modalFadeOut();
+      }
+   });
+
+
+
 
 
    let completedArea = document.getElementById("completed");
@@ -116,24 +132,12 @@ $(document).ready(function (){
    });
 
 
-// to-do:
-//    add keypress event for esc key on the add new card modal
-   window.addEventListener("keydown", function (e){
-      if(e.key === "Escape" && modalOpen){
-         modalFadeOut();
-      }
-   });
-
-
-
-
-
 
    function singLyrics(lyrics, pitch) {
       return new Promise((res) => {
-         var lyric = new SpeechSynthesisUtterance(lyrics);
+         const lyric = new SpeechSynthesisUtterance(lyrics);
          lyric.pitch = pitch;
-         lyric.rate = .5;
+         lyric.rate = .8;
          speechSynthesis.speak(lyric);
          setTimeout(res, 1000);
       });
@@ -141,13 +145,9 @@ $(document).ready(function (){
 
    const singPromises = () => {
       let text = $("#card").children()[0].innerText
-      return singLyrics(text, 1.5);
+      return singLyrics(text, 1.2);
    };
 
    document.getElementById('readCard').addEventListener('click', singPromises);
-
-
-
-
 
 });
