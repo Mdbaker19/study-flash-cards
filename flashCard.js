@@ -45,7 +45,7 @@ $(document).ready(function (){
                                     <div class="flip-card-inner">
                                         <div class="flip-card-front">
                                             <h1>${cardObj.title}</h1>
-                                            <p>${cardObj.question}</p>
+                                            <pre>${cardObj.question}</pre>
                                         </div>
                                         <div class="flip-card-back">
                                             <h1>Answer</h1>
@@ -58,7 +58,7 @@ $(document).ready(function (){
                    <div class="flip-card-inner">
                        <div class="flip-card-front">
                            <h1>${cardObj.title}</h1>
-                           <p>${cardObj.question}</p>
+                           <pre>${cardObj.question}</pre>
                        </div>
                        <div class="flip-card-back">
                            <h1>Answer</h1>
