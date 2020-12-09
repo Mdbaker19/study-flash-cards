@@ -33,17 +33,33 @@ $(document).ready(function (){
       $("#card").html(render(allCards[count]));
    });
 
+
+
+   // function render(cardObj){
+   //    return `<div id="cardContent">
+   //                 <h6 id="categoryOfCard">${cardObj.category}</h6>
+   //                 <h1>${cardObj.title}</h1>
+   //                 <hr>
+   //                 <p>${cardObj.question}</p>
+   //                 <hr>
+   //            </div>`
+   // }
+
    function render(cardObj){
-      return `<div id="cardContent">
-                   <h6 id="categoryOfCard">${cardObj.category}</h6>
-                   <h1>${cardObj.title}</h1>
-                   <hr>
-                   <p>${cardObj.question}</p>
-                   <hr>
-              </div>`
+      return `<div class="flip-card">
+               <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                  <h1>${cardObj.title}</h1>
+                  <p>${cardObj.question}</p>
+               </div>
+               <div class="flip-card-back">
+                  <h1>Answer</h1>
+                  <p>${cardObj.answer}</p>
+               </div>
+            </div>
+            </div>
+    `
    }
-
-
 
 
 
