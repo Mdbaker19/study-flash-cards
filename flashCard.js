@@ -149,5 +149,4 @@ $(document).ready(function (){
    };
 
    document.getElementById('readCard').addEventListener('click', singPromises);
-
 });
