@@ -29,6 +29,8 @@ $(document).ready(function (){
 
     let count = 0;
     $("#nextCard").on("click", function (){
+        console.log(count);
+        console.log(allCards[count]);
         hljs.initHighlighting();
         count++;
         if(count > allCards.length - 1) {
@@ -41,6 +43,9 @@ $(document).ready(function (){
 
     let setCurrentCardContent;
     function render(cardObj){
+        if(cardObj.code === "undefined"){
+            cardObj.code = "";
+        }
         setCurrentCardContent = `<div class="flip-card">
                                     <div class="flip-card-inner">
                                         <div class="flip-card-front">
@@ -80,6 +85,7 @@ ${cardObj.code}
                            <p>${cardObj.answer}</p>
                        </div>
                    </div>
+                   <span id="hiddenID">${cardObj.id}</span>
                </div>`
     }
 
@@ -126,19 +132,54 @@ ${cardObj.code}
     }
 
 
+    function editCardObj(title, question, answer, category, code, id){
+        return {
+            title: title,
+            question: question,
+            answer: answer,
+            category: category,
+            code: code,
+            id: id
+        }
+    }
 
 
     //=======EDIT FUNCTIONS===========//
     let editModalOpen = false;
-        $("body").on("click", "#edit", function () {
-            console.log("click");
-            editModalOpen = true;
-            $("#editCardModal").css("display", "flex");
-            $("#closeEditModal").on("click", function () {
-                modalFadeOut($("#editCardModal"));
-            });
+    $("body").on("click", "#edit", function () {
+        editModalOpen = true;
+        let currentID = $("#card").children()[0].lastChild.previousSibling.innerText;
+        console.log(currentID);
+        let currentCard = allCards[count];
+        let editTitleInput = $("#editCardTitle");
+        let editCategoryInput = $("#editCardCategory");
+        let editCodeInput = $("#editCardCode");
+        let editQuestionInput = $("#editCardQuestion");
+        let editAnswerInput = $("#editCardAnswer");
 
+        editTitleInput.val(currentCard.title);
+        editCategoryInput.val(currentCard.category);
+        editCodeInput.val(currentCard.code);
+        editQuestionInput.val(currentCard.question);
+        editAnswerInput.val(currentCard.answer);
+
+        $("#editCardModal").css("display", "flex");
+        $("#closeEditModal").on("click", function () {
+            modalFadeOut($("#editCardModal"));
         });
+        let currTitle = editTitleInput;
+        let currCategory = editCategoryInput;
+        let currCode = editCodeInput;
+        let currQuestion = editQuestionInput;
+        let currAnswer = editAnswerInput;
+        $("#submitEditCard").on("click", function () {
+            editCard(editCardObj(currTitle.val(), currQuestion.val(), currAnswer.val(), currCategory.val(), currCode.val(), currentID)).then(recallCards);
+            modalFadeOut($("#editCardModal"));
+        });
+    });
+
+
+
 
 
 
