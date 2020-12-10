@@ -6,6 +6,7 @@ $(document).ready(function (){
             allCards = data;
             console.log(data);
             $("#card").html(render(allCards[0]));
+            hljs.initHighlighting();
             clickCard();
         });
 
@@ -29,25 +30,31 @@ $(document).ready(function (){
 
     let count = 0;
     $("#nextCard").on("click", function (){
+        hljs.initHighlighting();
         count++;
         if(count > allCards.length - 1) {
             count = 0;
         }
-        $("#card").html(render(allCards[count]));
+        $("#card").html((render(allCards[count])));
         clickCard();
         flipCardBack();
     });
 
 
 
-    let currentCardContent;
+    let setCurrentCardContent;
     function render(cardObj){
-        currentCardContent = `<div class="flip-card">
+        setCurrentCardContent = `<div class="flip-card">
                                     <div class="flip-card-inner">
                                         <div class="flip-card-front">
+                                        <h6>${cardObj.category}</h6>
                                             <h1>${cardObj.title}</h1>
                                             <pre>${cardObj.question}</pre>
-                                            <pre>${cardObj.code}</pre>
+        <pre>
+    <code>
+${cardObj.code}
+    </code>
+        </pre>
                                         </div>
                                         <div class="flip-card-back">
                                             <h1>Answer</h1>
@@ -56,12 +63,19 @@ $(document).ready(function (){
                                     </div>
                                 </div>`;
 
+
+
         return `<div class="flip-card">
                    <div class="flip-card-inner">
                        <div class="flip-card-front">
+                           <h6>${cardObj.category}</h6>
                            <h1>${cardObj.title}</h1>
                            <pre>${cardObj.question}</pre>
-                           <pre>${cardObj.code}</pre>
+        <pre>
+    <code>
+${cardObj.code}
+    </code>
+        </pre>
                        </div>
                        <div class="flip-card-back">
                            <h1>Answer</h1>
@@ -70,6 +84,8 @@ $(document).ready(function (){
                    </div>
                </div>`
     }
+
+
 
     let currentCardFlipped = false;
     function clickCard() {
@@ -133,16 +149,34 @@ $(document).ready(function (){
 
 
 
+    //=======EDIT FUNCTIONS===========//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     let completedArea = document.getElementById("completed");
     $("#addToComplete").on("click", function(){
-        completedArea.insertAdjacentHTML("beforeend", currentCardContent);
+        completedArea.insertAdjacentHTML("beforeend", setCurrentCardContent);
     });
 
     let pinnedArea = document.getElementById("pinned");
     $("#addToPin").on("click", function (){
-        pinnedArea.insertAdjacentHTML("beforeend", currentCardContent);
+        pinnedArea.insertAdjacentHTML("beforeend", setCurrentCardContent);
     });
 
 

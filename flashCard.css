@@ -40,13 +40,12 @@ body::-webkit-scrollbar-thumb{
 /*}*/
 
 
-
 #addCard{
-    align-self: flex-start;
+    margin-right: auto;
     font-family: 'Poppins', sans-serif;
 }
 #readCard{
-    align-self: flex-end;
+    margin-left: auto;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -97,6 +96,13 @@ body::-webkit-scrollbar-thumb{
     height: 50%;
     width: 75%;
     justify-content: space-around;
+}
+#cardFunctions{
+    width: 100%;
+    display: flex;
+}
+h6{
+    align-self: flex-start;
 }
 hr{
     height: 4px;
@@ -190,6 +196,8 @@ button:hover{
 
 .flip-card-front, .flip-card-back {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     -webkit-backface-visibility: hidden;
