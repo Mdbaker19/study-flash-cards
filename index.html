@@ -43,6 +43,35 @@
     <button id="submitNewCard">Submit</button>
 </div>
 
+<div id="editCardModal">
+    <button id="closeEditModal">X</button>
+    <label>
+        Title
+        <input id="editCardTitle">
+    </label>
+    <label>
+        Category
+        <input id="editCardCategory">
+    </label>
+    <label>
+        Content
+        <textarea id="editCardQuestion">
+
+        </textarea>
+    </label>
+    <label>
+        Code
+        <textarea id="editCardCode">
+
+        </textarea>
+    </label>
+    <label>
+        Answer
+        <input id="editCardAnswer">
+    </label>
+    <button id="submitEditCard">Submit</button>
+</div>
+
 <div id="main">
     <div id="cardFunctions">
         <button id="addCard">Add new Card</button>
@@ -61,6 +90,7 @@
 
 <div id="finishedArea">
     <div class="storedCards" id="completed">
+        <h2>Double click card to flip (because edit button)</h2>
         <h5>Cards that you know the answer to, <em>Completed</em>, go here</h5>
 <!--        <pre>-->
 <!--            <code>-->

@@ -7,7 +7,6 @@ $(document).ready(function (){
             console.log(data);
             $("#card").html(render(allCards[0]));
             hljs.initHighlighting();
-            clickCard();
         });
 
     function recallCards(){
@@ -30,20 +29,23 @@ $(document).ready(function (){
 
     let count = 0;
     $("#nextCard").on("click", function (){
+        console.log(count);
+        console.log(allCards[count]);
         hljs.initHighlighting();
         count++;
         if(count > allCards.length - 1) {
             count = 0;
         }
         $("#card").html((render(allCards[count])));
-        clickCard();
-        flipCardBack();
     });
 
 
 
     let setCurrentCardContent;
     function render(cardObj){
+        if(cardObj.code === "undefined"){
+            cardObj.code = "";
+        }
         setCurrentCardContent = `<div class="flip-card">
                                     <div class="flip-card-inner">
                                         <div class="flip-card-front">
@@ -68,6 +70,7 @@ ${cardObj.code}
         return `<div class="flip-card">
                    <div class="flip-card-inner">
                        <div class="flip-card-front">
+                           <button id="edit">Edit</button>
                            <h6>${cardObj.category}</h6>
                            <h1>${cardObj.title}</h1>
                            <pre>${cardObj.question}</pre>
@@ -82,30 +85,19 @@ ${cardObj.code}
                            <p>${cardObj.answer}</p>
                        </div>
                    </div>
+                   <span id="hiddenID">${cardObj.id}</span>
                </div>`
     }
 
 
-
-    let currentCardFlipped = false;
-    function clickCard() {
-        if(!currentCardFlipped) {
-            $(".flip-card").on("click", function () {
-                $(this).children().css("transform", "rotateY(180deg)");
-                currentCardFlipped = true;
-                flipCardBack();
-            });
+    $("#card").on("dblclick", function (){
+        const flipCard = $(".flip-card-inner");
+        if(!flipCard.hasClass("flip")){
+            flipCard.addClass("flip");
+        } else {
+            flipCard.removeClass("flip");
         }
-    }
-    function flipCardBack(){
-        if(currentCardFlipped){
-            $(".flip-card").on("click", function (){
-                $(this).children().css("transform", "revert");
-                currentCardFlipped = false;
-                clickCard();
-            })
-        }
-    }
+    });
 
 
 
@@ -116,13 +108,12 @@ ${cardObj.code}
 
 
 
-
-    let modalOpen = false;
+    let addModalOpen = false;
     $("#addCard").on("click", function (){
-        modalOpen = true;
+        addModalOpen = true;
         $("#newCardModal").css("display", "flex");
         $("#closeNewCardModal").on("click", function (){
-            modalFadeOut();
+            modalFadeOut($("#newCardModal"));
         });
         let newCardTitle = $("#newCardTitle");
         let newCardCategory = $("#newCardCategory");
@@ -131,29 +122,74 @@ ${cardObj.code}
         let newCardCode = $("#newCardCode");
         $("#submitNewCard").on("click", function (){
             addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val(), newCardCode.val())).then(recallCards);
-            modalFadeOut();
+            modalFadeOut($("#newCardModal"));
         });
     });
 
 
-    function modalFadeOut(){
-        $("#newCardModal").fadeOut(500);
+    function modalFadeOut(jQObj){
+        jQObj.fadeOut(500);
     }
 
 
-    window.addEventListener("keydown", function (e){
-        if(e.key === "Escape" && modalOpen){
-            modalFadeOut();
+    function editCardObj(title, question, answer, category, code, id){
+        return {
+            title: title,
+            question: question,
+            answer: answer,
+            category: category,
+            code: code,
+            id: id
         }
+    }
+
+
+    //=======EDIT FUNCTIONS===========//
+    let editModalOpen = false;
+    $("body").on("click", "#edit", function () {
+        editModalOpen = true;
+        let currentID = $("#card").children()[0].lastChild.previousSibling.innerText;
+        console.log(currentID);
+        let currentCard = allCards[count];
+        let editTitleInput = $("#editCardTitle");
+        let editCategoryInput = $("#editCardCategory");
+        let editCodeInput = $("#editCardCode");
+        let editQuestionInput = $("#editCardQuestion");
+        let editAnswerInput = $("#editCardAnswer");
+
+        editTitleInput.val(currentCard.title);
+        editCategoryInput.val(currentCard.category);
+        editCodeInput.val(currentCard.code);
+        editQuestionInput.val(currentCard.question);
+        editAnswerInput.val(currentCard.answer);
+
+        $("#editCardModal").css("display", "flex");
+        $("#closeEditModal").on("click", function () {
+            modalFadeOut($("#editCardModal"));
+        });
+        let currTitle = editTitleInput;
+        let currCategory = editCategoryInput;
+        let currCode = editCodeInput;
+        let currQuestion = editQuestionInput;
+        let currAnswer = editAnswerInput;
+        $("#submitEditCard").on("click", function () {
+            editCard(editCardObj(currTitle.val(), currQuestion.val(), currAnswer.val(), currCategory.val(), currCode.val(), currentID)).then(recallCards);
+            modalFadeOut($("#editCardModal"));
+        });
     });
 
 
 
-    //=======EDIT FUNCTIONS===========//
 
 
 
-
+    window.addEventListener("keydown", function (e){
+        if(e.key === "Escape" && addModalOpen){
+            modalFadeOut($("#newCardModal"));
+        } else if(e.key === "Escape" && editModalOpen){
+            modalFadeOut($("#editCardModal"));
+        }
+    });
 
 
 
