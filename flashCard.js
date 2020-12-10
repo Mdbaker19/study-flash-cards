@@ -7,7 +7,6 @@ $(document).ready(function (){
             console.log(data);
             $("#card").html(render(allCards[0]));
             hljs.initHighlighting();
-            clickCard();
         });
 
     function recallCards(){
@@ -36,8 +35,6 @@ $(document).ready(function (){
             count = 0;
         }
         $("#card").html((render(allCards[count])));
-        clickCard();
-        flipCardBack();
     });
 
 
@@ -68,6 +65,7 @@ ${cardObj.code}
         return `<div class="flip-card">
                    <div class="flip-card-inner">
                        <div class="flip-card-front">
+                           <button id="edit">Edit</button>
                            <h6>${cardObj.category}</h6>
                            <h1>${cardObj.title}</h1>
                            <pre>${cardObj.question}</pre>
@@ -86,26 +84,14 @@ ${cardObj.code}
     }
 
 
-
-    let currentCardFlipped = false;
-    function clickCard() {
-        if(!currentCardFlipped) {
-            $(".flip-card").on("click", function () {
-                $(this).children().css("transform", "rotateY(180deg)");
-                currentCardFlipped = true;
-                flipCardBack();
-            });
+    $("#card").on("dblclick", function (){
+        const flipCard = $(".flip-card-inner");
+        if(!flipCard.hasClass("flip")){
+            flipCard.addClass("flip");
+        } else {
+            flipCard.removeClass("flip");
         }
-    }
-    function flipCardBack(){
-        if(currentCardFlipped){
-            $(".flip-card").on("click", function (){
-                $(this).children().css("transform", "revert");
-                currentCardFlipped = false;
-                clickCard();
-            })
-        }
-    }
+    });
 
 
 
@@ -116,13 +102,12 @@ ${cardObj.code}
 
 
 
-
-    let modalOpen = false;
+    let addModalOpen = false;
     $("#addCard").on("click", function (){
-        modalOpen = true;
+        addModalOpen = true;
         $("#newCardModal").css("display", "flex");
         $("#closeNewCardModal").on("click", function (){
-            modalFadeOut();
+            modalFadeOut($("#newCardModal"));
         });
         let newCardTitle = $("#newCardTitle");
         let newCardCategory = $("#newCardCategory");
@@ -131,29 +116,39 @@ ${cardObj.code}
         let newCardCode = $("#newCardCode");
         $("#submitNewCard").on("click", function (){
             addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val(), newCardCode.val())).then(recallCards);
-            modalFadeOut();
+            modalFadeOut($("#newCardModal"));
         });
     });
 
 
-    function modalFadeOut(){
-        $("#newCardModal").fadeOut(500);
+    function modalFadeOut(jQObj){
+        jQObj.fadeOut(500);
     }
 
-
-    window.addEventListener("keydown", function (e){
-        if(e.key === "Escape" && modalOpen){
-            modalFadeOut();
-        }
-    });
 
 
 
     //=======EDIT FUNCTIONS===========//
+    let editModalOpen = false;
+        $("body").on("click", "#edit", function () {
+            console.log("click");
+            editModalOpen = true;
+            $("#editCardModal").css("display", "flex");
+            $("#closeEditModal").on("click", function () {
+                modalFadeOut($("#editCardModal"));
+            });
+
+        });
 
 
 
-
+    window.addEventListener("keydown", function (e){
+        if(e.key === "Escape" && addModalOpen){
+            modalFadeOut($("#newCardModal"));
+        } else if(e.key === "Escape" && editModalOpen){
+            modalFadeOut($("#editCardModal"));
+        }
+    });
 
 
 

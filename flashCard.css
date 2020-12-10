@@ -51,7 +51,7 @@ body::-webkit-scrollbar-thumb{
 }
 
 
-#newCardModal{
+#newCardModal, #editCardModal{
     position: absolute;
     top: 20vh;
     left: 25vw;
@@ -69,10 +69,10 @@ body::-webkit-scrollbar-thumb{
     font-family: 'Poppins', sans-serif;
 
 }
-#newCardTitle, #newCardCategory, #newCardQuestion, #newCardAnswer {
+#newCardTitle, #newCardCategory, #newCardQuestion, #newCardAnswer, #editCardTitle, #editCardCategory, #editCardQuestion, #editCardAnswer{
     background: lightgrey;
 }
-#submitNewCard{
+#submitNewCard, #submitEditCard{
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -109,6 +109,11 @@ hr{
     height: 4px;
     width: 100%;
     background-color: blue;
+}
+#edit{
+    width: fit-content;
+    align-self: flex-end;
+    margin-bottom: -1rem;
 }
 
 
@@ -176,6 +181,14 @@ button:hover{
     background: darkgoldenrod;
 }
 
+
+
+
+
+
+
+
+
 .flip-card {
     background-color: transparent;
     width: 300px;
@@ -192,8 +205,6 @@ button:hover{
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-
-
 
 .flip-card-front, .flip-card-back {
     position: absolute;
@@ -213,5 +224,8 @@ button:hover{
 .flip-card-back {
     background-color: #2980b9;
     color: white;
+    transform: rotateY(180deg);
+}
+.flip{
     transform: rotateY(180deg);
 }
