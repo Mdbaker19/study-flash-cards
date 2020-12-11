@@ -53,9 +53,7 @@ $(document).ready(function (){
         if(cardObj.code === "undefined"){
             cardObj.code = "";
         }
-        setCurrentCardContent = `<div class="flip-card">
-                                    <div class="flip-card-inner">
-                                        <div class="flip-card-front">
+        setCurrentCardContent = `<div id="currentCardCopy">
                                         <h6>${cardObj.category}</h6>
                                             <h1>${cardObj.title}</h1>
                                             <pre>${cardObj.question}</pre>
@@ -64,12 +62,6 @@ $(document).ready(function (){
   ${cardObj.code}
     </code>
         </pre>
-                                        </div>
-                                        <div class="flip-card-back">
-                                            <h1>Answer</h1>
-                                            <p>${cardObj.answer}</p>
-                                        </div>
-                                    </div>
                                 </div>`;
 
 
