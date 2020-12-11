@@ -13,97 +13,98 @@
 </head>
 <body>
 
+    <div id="newCardModal">
+        <button id="closeNewCardModal">X</button>
+        <label>
+            Title
+            <input id="newCardTitle">
+        </label>
+        <label>
+            Category
+            <input id="newCardCategory">
+        </label>
+        <label>
+            Content
+            <textarea id="newCardQuestion">
 
-<div id="newCardModal">
-    <button id="closeNewCardModal">X</button>
-    <label>
-        Title
-        <input id="newCardTitle">
-    </label>
-    <label>
-        Category
-        <input id="newCardCategory">
-    </label>
-    <label>
-        Content
-        <textarea id="newCardQuestion">
+            </textarea>
+        </label>
+        <label>
+             Code
+             <textarea id="newCardCode">
 
-        </textarea>
-    </label>
-    <label>
-         Code
-         <textarea id="newCardCode">
-
-        </textarea>
-    </label>
-    <label>
-        Answer
-        <input id="newCardAnswer">
-    </label>
-    <button id="submitNewCard">Submit</button>
-</div>
-
-<div id="editCardModal">
-    <button id="closeEditModal">X</button>
-    <label>
-        Title
-        <input id="editCardTitle">
-    </label>
-    <label>
-        Category
-        <input id="editCardCategory">
-    </label>
-    <label>
-        Content
-        <textarea id="editCardQuestion">
-
-        </textarea>
-    </label>
-    <label>
-        Code
-        <textarea id="editCardCode">
-
-        </textarea>
-    </label>
-    <label>
-        Answer
-        <input id="editCardAnswer">
-    </label>
-    <button id="submitEditCard">Submit</button>
-</div>
-
-<div id="main">
-    <div id="cardFunctions">
-        <button id="addCard">Add new Card</button>
-        <button id="readCard">Read Card</button>
+            </textarea>
+        </label>
+        <label>
+            Answer
+            <input id="newCardAnswer">
+        </label>
+        <button id="submitNewCard">Submit</button>
     </div>
-    <div id="card">
 
+    <div id="editCardModal">
+        <div id="editAndDeleteButtons">
+            <button id="closeEditModal">X</button>
+            <button id="deleteCard">Delete</button>
+        </div>
+        <label>
+            Title
+            <input id="editCardTitle">
+        </label>
+        <label>
+            Category
+            <input id="editCardCategory">
+        </label>
+        <label>
+            Content
+            <textarea id="editCardQuestion">
+
+            </textarea>
+        </label>
+        <label>
+            Code
+            <textarea id="editCardCode">
+
+            </textarea>
+        </label>
+        <label>
+            Answer
+            <input id="editCardAnswer">
+        </label>
+        <button id="submitEditCard">Submit</button>
     </div>
-    <div id="cycle">
-        <button class="cycleThrough" id="nextCard">Next</button>
-        <button class="cycleThrough" id="addToComplete">Complete</button>
-        <button class="cycleThrough" id="addToPin">Pin</button>
+
+    <div id="main">
+        <div id="cardFunctions">
+            <button id="addCard">Add new Card</button>
+            <button id="readCard">Read Card</button>
+        </div>
+        <div id="card">
+
+        </div>
+        <div id="cycle">
+            <button class="cycleThrough" id="nextCard">Next</button>
+            <button class="cycleThrough" id="addToComplete">Complete</button>
+            <button class="cycleThrough" id="addToPin">Pin</button>
+        </div>
     </div>
-</div>
 
 
-<div id="finishedArea">
-    <div class="storedCards" id="completed">
-        <h2>Double click card to flip (because edit button)</h2>
-        <h5>Cards that you know the answer to, <em>Completed</em>, go here</h5>
-<!--        <pre>-->
-<!--            <code>-->
-<!--                function add(x, y){-->
-<!--                    return x + y;-->
-<!--                }-->
-<!--            </code>-->
+    <div id="finishedArea">
+        <div class="storedCards" id="completed">
+            <h2>Double click card to flip</h2>
+            <h5>Cards that you know the answer to, <em>Completed</em>, go here</h5>
+<!--<pre><code>-->
+<!--function add(x, y){-->
+<!--    return x + y;-->
+<!--}-->
+<!--</code>-->
 <!--        </pre>-->
+        </div>
+        <div class="storedCards" id="pinned">
+            <h5>Cards that you need to work on, <em>Pinned</em>, go here</h5>
+        </div>
     </div>
-    <div class="storedCards" id="pinned">
-        <h5>Cards that you need to work on, <em>Pinned</em>, go here</h5>
-    </div>
-</div>
 
 <script src="jQ.js"></script>
 <script src="CRUD.js"></script>
