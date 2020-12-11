@@ -27,11 +27,12 @@ $(document).ready(function (){
         }
     }
 
+    function modalFadeOut(modalObj){
+        modalObj.fadeOut(500);
+    }
+
     let count = 0;
     $("#nextCard").on("click", function (){
-        console.log(count);
-        console.log(allCards[count]);
-        hljs.initHighlighting();
         count++;
         if(count > allCards.length - 1) {
             count = 0;
@@ -44,14 +45,14 @@ $(document).ready(function (){
     let setCurrentCardContent;
     function render(cardObj){
         if(cardObj.code === "undefined"){
-            cardObj.code = "";
+            cardObj.code = null;
         }
         setCurrentCardContent = `<div class="flip-card">
                                     <div class="flip-card-inner">
                                         <div class="flip-card-front">
                                         <h6>${cardObj.category}</h6>
                                             <h1>${cardObj.title}</h1>
-                                            <pre>${cardObj.question}</pre>
+                                            <p>${cardObj.question}</p>
         <pre>
     <code>
 ${cardObj.code}
@@ -73,11 +74,11 @@ ${cardObj.code}
                            <button id="edit">Edit</button>
                            <h6>${cardObj.category}</h6>
                            <h1>${cardObj.title}</h1>
-                           <pre>${cardObj.question}</pre>
+                           <p>${cardObj.question}</p>
         <pre>
-    <code>
+<code>
 ${cardObj.code}
-    </code>
+<code>
         </pre>
                        </div>
                        <div class="flip-card-back">
@@ -105,9 +106,6 @@ ${cardObj.code}
 
 
 
-
-
-
     let addModalOpen = false;
     $("#addCard").on("click", function (){
         addModalOpen = true;
@@ -127,30 +125,23 @@ ${cardObj.code}
     });
 
 
-    function modalFadeOut(jQObj){
-        jQObj.fadeOut(500);
-    }
 
-
-    function editCardObj(title, question, answer, category, code, id){
-        return {
-            title: title,
-            question: question,
-            answer: answer,
-            category: category,
-            code: code,
-            id: id
-        }
-    }
-
-
-    //=======EDIT FUNCTIONS===========//
+    //=======EDIT AND DELETE FUNCTIONS===========//
     let editModalOpen = false;
     $("body").on("click", "#edit", function () {
         editModalOpen = true;
         let currentID = $("#card").children()[0].lastChild.previousSibling.innerText;
-        console.log(currentID);
+        let currentCardHTML = $(this).parent();
         let currentCard = allCards[count];
+
+        $("#deleteCard").on("click", function(){
+           deleteCard(currentID).then( () => {
+               recallCards();
+               $("#card").html((render(allCards[count - 1])));
+           });
+           modalFadeOut($("#editCardModal"));
+        });
+
         let editTitleInput = $("#editCardTitle");
         let editCategoryInput = $("#editCardCategory");
         let editCodeInput = $("#editCardCode");
@@ -167,13 +158,20 @@ ${cardObj.code}
         $("#closeEditModal").on("click", function () {
             modalFadeOut($("#editCardModal"));
         });
-        let currTitle = editTitleInput;
-        let currCategory = editCategoryInput;
-        let currCode = editCodeInput;
-        let currQuestion = editQuestionInput;
-        let currAnswer = editAnswerInput;
         $("#submitEditCard").on("click", function () {
-            editCard(editCardObj(currTitle.val(), currQuestion.val(), currAnswer.val(), currCategory.val(), currCode.val(), currentID)).then(recallCards);
+            let newCardObj = {
+                title: editTitleInput.val(),
+                category: editCategoryInput.val(),
+                code: editCodeInput.val(),
+                question: editQuestionInput.val(),
+                answer: editAnswerInput.val(),
+                id: currentID
+            }
+            currentCardHTML.html((render(newCardObj)));
+            editCard(newCardObj).then( () => {
+                allCards[count] = newCardObj;
+                recallCards();
+            });
             modalFadeOut($("#editCardModal"));
         });
     });
@@ -190,15 +188,6 @@ ${cardObj.code}
             modalFadeOut($("#editCardModal"));
         }
     });
-
-
-
-
-
-
-
-
-
 
 
 
