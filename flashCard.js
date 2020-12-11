@@ -1,5 +1,7 @@
 $(document).ready(function (){
     let allCards = [];
+    let currentCardNumber = $("#currentCardNumber");
+    let cardDeckSize = $("#deckSizeNumber");
     fetch(baseURL)
         .then(res => res.json())
         .then(data => {
@@ -7,6 +9,8 @@ $(document).ready(function (){
             console.log(data);
             $("#card").html(render(allCards[0]));
             hljs.initHighlighting();
+            currentCardNumber.text(1);
+            cardDeckSize.text(allCards.length);
         });
 
     function recallCards(){
@@ -14,6 +18,7 @@ $(document).ready(function (){
             .then( res => res.json())
             .then( data => {
                 allCards = data;
+                cardDeckSize.text(allCards.length);
             });
     }
 
@@ -37,6 +42,7 @@ $(document).ready(function (){
         if(count > allCards.length - 1) {
             count = 0;
         }
+        currentCardNumber.text(count+1);
         $("#card").html((render(allCards[count])));
     });
 
@@ -45,17 +51,17 @@ $(document).ready(function (){
     let setCurrentCardContent;
     function render(cardObj){
         if(cardObj.code === "undefined"){
-            cardObj.code = null;
+            cardObj.code = "";
         }
         setCurrentCardContent = `<div class="flip-card">
                                     <div class="flip-card-inner">
                                         <div class="flip-card-front">
                                         <h6>${cardObj.category}</h6>
                                             <h1>${cardObj.title}</h1>
-                                            <p>${cardObj.question}</p>
+                                            <pre>${cardObj.question}</pre>
         <pre>
     <code>
-${cardObj.code}
+  ${cardObj.code}
     </code>
         </pre>
                                         </div>
@@ -74,11 +80,11 @@ ${cardObj.code}
                            <button id="edit">Edit</button>
                            <h6>${cardObj.category}</h6>
                            <h1>${cardObj.title}</h1>
-                           <p>${cardObj.question}</p>
+                           <pre>${cardObj.question}</pre>
         <pre>
-<code>
-${cardObj.code}
-<code>
+  <code>
+  ${cardObj.code}
+  </code>
         </pre>
                        </div>
                        <div class="flip-card-back">
@@ -101,7 +107,18 @@ ${cardObj.code}
     });
 
 
-
+    //=======SEARCH DECK==========//
+    let searchDeckOpen = false;
+    $("#searchDeck").on("click", function(){
+        searchDeckOpen = true;
+       $("#searchDeckModal").css("display", "flex");
+       $("#closeSearchDeck").on("click", function (){
+           modalFadeOut($("#searchDeckModal"));
+       });
+        $(".languageOptions").on("click", function (){
+           $(this).css("backgroundColor", "#8c8989")
+        });
+    });
 
 
 
@@ -136,7 +153,6 @@ ${cardObj.code}
 
         $("#deleteCard").on("click", function(){
            deleteCard(currentID).then( () => {
-               recallCards();
                $("#card").html((render(allCards[count - 1])));
            });
            modalFadeOut($("#editCardModal"));
@@ -182,10 +198,17 @@ ${cardObj.code}
 
 
     window.addEventListener("keydown", function (e){
-        if(e.key === "Escape" && addModalOpen){
-            modalFadeOut($("#newCardModal"));
-        } else if(e.key === "Escape" && editModalOpen){
-            modalFadeOut($("#editCardModal"));
+        if(e.key === "Escape"){
+            if(addModalOpen){
+                modalFadeOut($("#newCardModal"));
+                addModalOpen = false;
+            } else if(editModalOpen){
+                modalFadeOut($("#editCardModal"));
+                editModalOpen = false;
+            } else if(searchDeckOpen){
+                modalFadeOut($("#searchDeckModal"));
+                searchDeckOpen = false;
+            }
         }
     });
 
