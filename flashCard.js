@@ -5,6 +5,7 @@ $(document).ready(function (){
     fetch(baseURL)
         .then(res => res.json())
         .then(data => {
+            $("#loadingArea").fadeOut(100);
             allCards = data;
             console.log(data);
             $("#card").html(render(allCards[0]));

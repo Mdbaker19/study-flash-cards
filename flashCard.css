@@ -30,6 +30,17 @@ body::-webkit-scrollbar-thumb{
     height: 90%;
     width: 60%;
 }
+#loadingArea{
+    position: absolute;
+    left: 38%;
+    top: 15%;
+    width: 25vw;
+    height: 20vh;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 #addCard{
