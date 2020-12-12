@@ -101,13 +101,17 @@ $(document).ready(function (){
 
     //=======SEARCH DECK==========//
     let searchDeckOpen = false;
+    let searchOptionsSet;
     $("#searchDeck").on("click", function(){
-        let searchOptionsSet = new Set();
+        searchOptionsSet = new Set();
         searchDeckOpen = true;
-       $("#searchDeckModal").css("display", "flex");
-       $("#closeSearchDeck").on("click", function (){
+        $("#searchDeckModal").css("display", "flex");
+        $("#closeSearchDeck").on("click", function (){
            modalFadeOut($("#searchDeckModal"));
-       });
+           searchOptionsSet.clear();
+        });
+
+
         $(".languageOptions").on("click", function (){
            let languageSelection = $(this)[0].innerText;
            if($(this).hasClass("languageOptionsClicked")){
@@ -123,6 +127,7 @@ $(document).ready(function (){
             console.log("filtered categories include");
             console.log(searchOptionsSet);
         });
+
 
         $("#applyDeckFilter").on("click", function (){
             let appliedCards = [];
