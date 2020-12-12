@@ -102,15 +102,50 @@ $(document).ready(function (){
     //=======SEARCH DECK==========//
     let searchDeckOpen = false;
     $("#searchDeck").on("click", function(){
+        let searchOptionsSet = new Set();
         searchDeckOpen = true;
        $("#searchDeckModal").css("display", "flex");
        $("#closeSearchDeck").on("click", function (){
            modalFadeOut($("#searchDeckModal"));
        });
         $(".languageOptions").on("click", function (){
-           $(this).css("backgroundColor", "#8c8989")
+           let languageSelection = $(this)[0].innerText;
+           if($(this).hasClass("languageOptionsClicked")){
+               $(this).removeClass("languageOptionsClicked");
+           } else {
+               $(this).addClass("languageOptionsClicked");
+           }
+           if(!searchOptionsSet.has(languageSelection)){
+               searchOptionsSet.add(languageSelection);
+           } else {
+               searchOptionsSet.delete(languageSelection);
+           }
+            console.log("filtered categories include");
+            console.log(searchOptionsSet);
+        });
+
+        $("#applyDeckFilter").on("click", function (){
+            let appliedCards = [];
+            let searchOptionsArr = [];
+            searchOptionsSet.forEach(item => {
+                searchOptionsArr.push(item);
+            });
+            allCards.forEach(card => {
+                for(let i = 0; i < searchOptionsArr.length; i++){
+                    if(card.category.toLowerCase() === searchOptionsArr[i].toLowerCase()){
+                        appliedCards.push(card);
+                    }
+                }
+            });
+            modalFadeOut($("#searchDeckModal"));
+            searchDeckOpen = false;
+            console.log("filtered selection: ");
+            console.log(appliedCards);
         });
     });
+
+
+
 
 
 
@@ -225,14 +260,15 @@ $(document).ready(function (){
         return new Promise((res) => {
             const voice = new SpeechSynthesisUtterance(input);
             voice.pitch = pitch;
-            voice.rate = .8;
+            voice.rate = 1;
             speechSynthesis.speak(voice);
             setTimeout(res, 1000);
         });
     }
 
     const readCard = () => {
-        let text = $("#card").children()[0].innerText
+        let textArr = $("#card").children()[0].innerText.split("\n");
+        let text = textArr.slice(0, textArr.length -3);
         return voiceReader(text, 1.2);
     };
 
@@ -241,8 +277,10 @@ $(document).ready(function (){
         clickCountOfVoice++;
         if(clickCountOfVoice % 2 !== 0) {
             readCard();
+            $("#readCard").text("Stop Reader");
         } else {
             speechSynthesis.cancel();
+            $("#readCard").text("Read Card");
         }
     });
 });
