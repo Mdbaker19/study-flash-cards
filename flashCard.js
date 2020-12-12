@@ -215,9 +215,16 @@ $(document).ready(function (){
                 answer: editAnswerInput.val(),
                 id: currentID
             }
+            let reassignCardObj = {
+                title: editTitleInput.val(),
+                category: editCategoryInput.val(),
+                code: editCodeInput.val(),
+                question: editQuestionInput.val(),
+                answer: editAnswerInput.val()
+            }
             currentCardHTML.html((render(newCardObj)));
             editCard(newCardObj).then( () => {
-                allCards[count] = newCardObj;
+                allCards[count] = reassignCardObj;
                 recallCards();
             });
             modalFadeOut($("#editCardModal"));
@@ -273,7 +280,7 @@ $(document).ready(function (){
 
     const readCard = () => {
         let textArr = $("#card").children()[0].innerText.split("\n");
-        let text = textArr.slice(0, textArr.length -3);
+        let text = textArr.slice(2, textArr.length -3);
         return voiceReader(text, 1.2);
     };
 
