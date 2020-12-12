@@ -102,9 +102,8 @@ $(document).ready(function (){
 
     //=======SEARCH DECK==========//
     let searchDeckOpen = false;
-    let searchOptionsSet;
+    let searchOptionsSet = new Set();
     $("#searchDeck").on("click", function(){
-        searchOptionsSet = new Set();
         searchDeckOpen = true;
         $("#searchDeckModal").css("display", "flex");
         $("#closeSearchDeck").on("click", function (){
