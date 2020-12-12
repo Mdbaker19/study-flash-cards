@@ -20,14 +20,14 @@ body::-webkit-scrollbar-thumb{
 }
 #main{
     width: 95vw;
-    height: 50vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2.5vh 2.5vw 5vh;
+    margin: 2.5vh 2.5vw 2vh;
 }
 #card{
-    height: 90%;
+    height: 68%;
     width: 60%;
 }
 #loadingArea{
@@ -211,7 +211,7 @@ hr{
     justify-content: space-around;
     width: 50%;
     margin-top: 3%;
-    height: 12%;
+    height: 20%;
 }
 .cycleThrough{
     background-color: whitesmoke;
@@ -343,5 +343,15 @@ pre{
     }
     #pinned{
         margin-left: 2.5%;
+    }
+    #main{
+        height: 50vh;
+        margin-bottom: 5vh;
+    }
+    #card{
+        height: 90%;
+    }
+    #cycle{
+        height: 12%;
     }
 }
