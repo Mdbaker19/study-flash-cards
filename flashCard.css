@@ -85,7 +85,7 @@ body::-webkit-scrollbar-thumb{
     flex-wrap: wrap;
     justify-content: space-around;
     transform-style: preserve-3d;
-    animation: spin 1s;
+    animation: spin 0.6s;
 }
 .languageOptions{
     width: 34%;
@@ -161,11 +161,24 @@ body::-webkit-scrollbar-thumb{
 
 
 
+.buttonFunctions{
+    padding: 2px;
+}
 
-
-
-
-
+.closeModalButton{
+    margin-left: auto;
+    width: 25px;
+}
+#closeNewCardModal{
+    margin-bottom: -30px;
+    margin-top: -33px;
+}
+#editAndDeleteButtons{
+    width: 90%;
+    display: flex;
+    margin-bottom: -21px;
+    margin-top: -40px;
+}
 
 
 
@@ -193,6 +206,7 @@ body::-webkit-scrollbar-thumb{
 }
 h6{
     align-self: flex-start;
+    margin-left: 5px;
 }
 hr{
     height: 4px;
@@ -368,5 +382,8 @@ pre{
         justify-content: center;
         width: 10%;
         margin-top: -40px;
+    }
+    .buttonFunctions{
+        padding: 5px;
     }
 }
