@@ -1,2 +1,2 @@
 # study-flash-cards
-Glitch json server for flash cards to study programming topics
+Class generated flash cards saved to glitch JSON server to study programming topics
