@@ -1,5 +1,6 @@
 $(document).ready(function (){
     let allCards = [];
+    let baseAllCards = [];
     let currentCardNumber = $("#currentCardNumber");
     let cardDeckSize = $("#deckSizeNumber");
     fetch(baseURL)
@@ -7,6 +8,7 @@ $(document).ready(function (){
         .then(data => {
             $("#loadingArea").fadeOut(100);
             allCards = data;
+            baseAllCards = data;
             console.log(data);
             $("#card").html(render(allCards[0]));
             hljs.initHighlighting();
@@ -111,10 +113,10 @@ $(document).ready(function (){
            searchOptionsSet.clear();
         });
 
-
         $(".languageOptions").on("click", function (){
            let languageSelection = $(this)[0].innerText;
-           if($(this).hasClass("languageOptionsClicked")){
+            console.log($(this));
+            if($(this).hasClass("languageOptionsClicked")){
                $(this).removeClass("languageOptionsClicked");
            } else {
                $(this).addClass("languageOptionsClicked");
@@ -130,6 +132,7 @@ $(document).ready(function (){
 
 
         $("#applyDeckFilter").on("click", function (){
+            allCards = baseAllCards;
             let appliedCards = [];
             let searchOptionsArr = [];
             searchOptionsSet.forEach(item => {
@@ -142,10 +145,17 @@ $(document).ready(function (){
                     }
                 }
             });
+            cardDeckSize.text(appliedCards.length);
+            if(appliedCards.length < 1){
+                currentCardNumber.text(0);
+                $("#card").fadeOut(100);
+            } else {
+                $("#card").show();
+                currentCardNumber.text(1);
+            }
+            allCards = appliedCards;
             modalFadeOut($("#searchDeckModal"));
             searchDeckOpen = false;
-            console.log("filtered selection: ");
-            console.log(appliedCards);
         });
     });
 
@@ -215,16 +225,8 @@ $(document).ready(function (){
                 answer: editAnswerInput.val(),
                 id: currentID
             }
-            let reassignCardObj = {
-                title: editTitleInput.val(),
-                category: editCategoryInput.val(),
-                code: editCodeInput.val(),
-                question: editQuestionInput.val(),
-                answer: editAnswerInput.val()
-            }
             currentCardHTML.html((render(newCardObj)));
             editCard(newCardObj).then( () => {
-                allCards[count] = reassignCardObj;
                 recallCards();
             });
             modalFadeOut($("#editCardModal"));
