@@ -9,7 +9,7 @@ const editCard = card => fetch(`${baseURL}/${card.id}`, {
 })
     .then(r => r.json())
     .then(d => {
-        console.log(`Editied card ${JSON.stringify(d)}`);
+        console.log(`Edited card ${JSON.stringify(d)}`);
     })
     .catch(err => console.error(err));
 

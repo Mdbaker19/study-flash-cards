@@ -179,7 +179,7 @@ $(document).ready(function (){
         let newCardAnswer = $("#newCardAnswer");
         let newCardCode = $("#newCardCode");
         $("#submitNewCard").on("click", function (){
-            addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val(), newCardCode.val())).then(recallCards);
+            addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val().replace(/</g, "&lt").replace(/>/g, "&lt"), newCardCode.val().replace(/</g, "&lt").replace(/>/g, "&lt"))).then(recallCards);
             modalFadeOut($("#newCardModal"));
         });
     });
@@ -221,8 +221,8 @@ $(document).ready(function (){
             let newCardObj = {
                 title: editTitleInput.val(),
                 category: editCategoryInput.val(),
-                code: editCodeInput.val(),
-                question: editQuestionInput.val(),
+                code: editCodeInput.val().replace(/</g, "&lt").replace(/>/g, "&lt"),
+                question: editQuestionInput.val().replace(/</g, "&lt").replace(/>/g, "&lt"),
                 answer: editAnswerInput.val(),
                 id: currentID
             }
