@@ -35,6 +35,6 @@ const addCard = card => fetch(`${baseURL}`, {
     .then( r => r.json())
     .then(d => {
         console.log(`Created ${JSON.stringify(d)}`);
-        return d.id;
+        return d;
     })
     .catch( err => console.error(err));

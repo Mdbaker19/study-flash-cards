@@ -50,7 +50,6 @@ $(document).ready(function (){
     });
 
 
-
     let setCurrentCardContent;
     function render(cardObj){
         if(cardObj.code === "undefined"){
@@ -104,108 +103,106 @@ $(document).ready(function (){
 
     //=======SEARCH DECK==========//
     let searchDeckOpen = false;
-    $("#searchDeck").on("click", function(){
-        $(this).css("display", "none");// ADDED TEMPORARILY DUE TO FILTERING CAUSING SOME WEIRD ISSUES WHEN TRYING TO FILTER FOR A SECOND TIME
-        let searchOptionsSet = [];
+    let searchOptionsSet;
+    let languageSelection;
+
+
+    $("#searchDeck").on("click", function() {
+        searchOptionsSet = [];
         searchDeckOpen = true;
+        $(this).css("display", "none");
         $("#searchDeckModal").css("display", "flex");
-        $("#closeSearchDeck").on("click", function (){
-           modalFadeOut($("#searchDeckModal"));
-        });
-
-        $(".languageOptions").on("click", function (){
-           let languageSelection = $(this)[0].innerText;
-            if($(this).hasClass("languageOptionsClicked")){
-               $(this).removeClass("languageOptionsClicked");
-           } else {
-               $(this).addClass("languageOptionsClicked");
-           }
-
-
-
-           if(!searchOptionsSet.includes(languageSelection)){
-               searchOptionsSet.push(languageSelection);
-           } else {
-               let index = searchOptionsSet.indexOf(languageSelection);
-               searchOptionsSet.splice(index, 1);
-           }
-            console.log(searchOptionsSet);
-        });
-
-
-        $("#applyDeckFilter").on("click", function (){
-            allCards = baseAllCards;
-            let appliedCards = [];
-            let searchOptionsArr = [];
-            searchOptionsSet.forEach(item => {
-                searchOptionsArr.push(item);
-            });
-            allCards.forEach(card => {
-                for(let i = 0; i < searchOptionsArr.length; i++){
-                    if(card.category.toLowerCase() === searchOptionsArr[i].toLowerCase()){
-                        appliedCards.push(card);
-                    }
-                }
-            });
-            cardDeckSize.text(appliedCards.length);
-            if(appliedCards.length < 1){
-                currentCardNumber.text(0);
-                $("#card").fadeOut(100);
-                $("#cycle").css("marginTop", "0px");
-            } else {
-                $("#card").show();
-                currentCardNumber.text(1);
-                $("#cycle").css("marginTop", "-40px");
-            }
-            allCards = appliedCards;
+        $("#closeSearchDeck").on("click", function () {
             modalFadeOut($("#searchDeckModal"));
-            searchDeckOpen = false;
+        });
+        $(".languageOptions").on("click", function () {
+            languageSelection = $(this)[0].innerText;
+            if ($(this).hasClass("languageOptionsClicked")) {
+                $(this).removeClass("languageOptionsClicked");
+            } else {
+                $(this).addClass("languageOptionsClicked");
+            }
+
+            if (!searchOptionsSet.includes(languageSelection)) {
+                searchOptionsSet.push(languageSelection);
+            } else {
+                let index = searchOptionsSet.indexOf(languageSelection);
+                searchOptionsSet.splice(index, 1);
+            }
+            console.log(searchOptionsSet);
         });
     });
 
 
+    $("#applyDeckFilter").on("click", function (){
+        allCards = baseAllCards;
+        let appliedCards = [];
+        let searchOptionsArr = [];
+        searchOptionsSet.forEach(item => {
+            searchOptionsArr.push(item);
+        });
+        allCards.forEach(card => {
+            for(let i = 0; i < searchOptionsArr.length; i++){
+                if(card.category.toLowerCase() === searchOptionsArr[i].toLowerCase()){
+                    appliedCards.push(card);
+                }
+            }
+        });
+        cardDeckSize.text(appliedCards.length);
+        if(appliedCards.length < 1){
+            currentCardNumber.text(0);
+            $("#card").fadeOut(100);
+            $("#cycle").css("marginTop", "0px");
+        } else {
+            $("#card").show();
+            currentCardNumber.text(1);
+            $("#cycle").css("marginTop", "-40px");
+        }
+        allCards = appliedCards;
+        modalFadeOut($("#searchDeckModal"));
+        searchDeckOpen = false;
+    });
+
 
     let addModalOpen = false;
+    let newCardTitle;
+    let newCardCategory;
+    let newCardQuestion;
+    let newCardAnswer;
+    let newCardCode;
     $("#addCard").on("click", function (){
-        $(this).css("display", "none");//ADDED TEMPORARILY TO FORCE A REFRESH TO ADD ANOTHER CARD DUE TO THERE BEING ISSUES WITH CARDS DUPLICATING
         addModalOpen = true;
         $("#newCardModal").css("display", "flex");
         $("#closeNewCardModal").on("click", function (){
             modalFadeOut($("#newCardModal"));
         });
-        let newCardTitle = $("#newCardTitle");
-        let newCardCategory = $("#newCardCategory");
-        let newCardQuestion = $("#newCardQuestion");
-        let newCardAnswer = $("#newCardAnswer");
-        let newCardCode = $("#newCardCode");
-        $("#submitNewCard").on("click", function (){
-            addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val().replace(/</g, "&lt").replace(/>/g, "&lt"), newCardCode.val().replace(/</g, "&lt").replace(/>/g, "&lt"))).then(recallCards);
-            modalFadeOut($("#newCardModal"));
-        });
+        newCardTitle = $("#newCardTitle");
+        newCardCategory = $("#newCardCategory");
+        newCardQuestion = $("#newCardQuestion");
+        newCardAnswer = $("#newCardAnswer");
+        newCardCode = $("#newCardCode");
     });
 
+    $("#submitNewCard").on("click", function (){
+        addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val().replace(/</g, "&lt").replace(/>/g, "&lt"), newCardCode.val().replace(/</g, "&lt").replace(/>/g, "&lt"))).then(recallCards);
+        modalFadeOut($("#newCardModal"));
+    });
 
 
     //=======EDIT AND DELETE FUNCTIONS===========//
     let editModalOpen = false;
+    let currentID;
+    let currentCardHTML;
+    let editTitleInput = $("#editCardTitle");
+    let editCategoryInput = $("#editCardCategory");
+    let editCodeInput = $("#editCardCode");
+    let editQuestionInput = $("#editCardQuestion");
+    let editAnswerInput = $("#editCardAnswer");
     $("body").on("click", "#edit", function () {
         editModalOpen = true;
-        let currentID = $("#card").children()[0].lastChild.previousSibling.innerText;
-        let currentCardHTML = $(this).parent();
+        currentID = $("#card").children()[0].lastChild.previousSibling.innerText;
+        currentCardHTML = $(this).parent();
         let currentCard = allCards[count];
-
-        $("#deleteCard").on("click", function(){
-           deleteCard(currentID).then( () => {
-               $("#card").html((render(allCards[count - 1])));
-           });
-           modalFadeOut($("#editCardModal"));
-        });
-
-        let editTitleInput = $("#editCardTitle");
-        let editCategoryInput = $("#editCardCategory");
-        let editCodeInput = $("#editCardCode");
-        let editQuestionInput = $("#editCardQuestion");
-        let editAnswerInput = $("#editCardAnswer");
 
         editTitleInput.val(currentCard.title);
         editCategoryInput.val(currentCard.category);
@@ -217,24 +214,30 @@ $(document).ready(function (){
         $("#closeEditModal").on("click", function () {
             modalFadeOut($("#editCardModal"));
         });
-        $("#submitEditCard").on("click", function () {
-            let newCardObj = {
-                title: editTitleInput.val(),
-                category: editCategoryInput.val(),
-                code: editCodeInput.val().replace(/</g, "&lt").replace(/>/g, "&lt"),
-                question: editQuestionInput.val().replace(/</g, "&lt").replace(/>/g, "&lt"),
-                answer: editAnswerInput.val(),
-                id: currentID
-            }
-            currentCardHTML.html((render(newCardObj)));
-            editCard(newCardObj).then( () => {
-                recallCards();
-            });
-            modalFadeOut($("#editCardModal"));
-        });
     });
 
+    $("#submitEditCard").on("click", function () {
+        let newCardObj = {
+            title: editTitleInput.val(),
+            category: editCategoryInput.val(),
+            code: editCodeInput.val().replace(/</g, "&lt").replace(/>/g, "&lt"),
+            question: editQuestionInput.val().replace(/</g, "&lt").replace(/>/g, "&lt"),
+            answer: editAnswerInput.val(),
+            id: currentID
+        }
+        currentCardHTML.html((render(newCardObj)));
+        editCard(newCardObj).then( () => {
+            recallCards();
+        });
+        modalFadeOut($("#editCardModal"));
+    });
 
+    $("#deleteCard").on("click", function(){
+        deleteCard(currentID).then( () => {
+            $("#card").html((render(allCards[count - 1])));
+        });
+        modalFadeOut($("#editCardModal"));
+    });
 
 
 
@@ -256,9 +259,6 @@ $(document).ready(function (){
 
 
 
-
-
-
     let completedArea = document.getElementById("completed");
     $("#addToComplete").on("click", function(){
         completedArea.insertAdjacentHTML("beforeend", setCurrentCardContent);
@@ -268,7 +268,6 @@ $(document).ready(function (){
     $("#addToPin").on("click", function (){
         pinnedArea.insertAdjacentHTML("beforeend", setCurrentCardContent);
     });
-
 
 
     function voiceReader(input, pitch) {
