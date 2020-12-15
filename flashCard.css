@@ -336,6 +336,16 @@ pre{
     color: white;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
+    overflow: scroll;
+}
+.flip-card-front::-webkit-scrollbar{
+    width: .25rem;
+}
+.flip-card-front::-webkit-scrollbar-track{
+    background: darkgoldenrod;
+}
+.flip-card-front::-webkit-scrollbar-thumb{
+    background: darkgoldenrod;
 }
 
 .flip-card-back {

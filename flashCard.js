@@ -149,19 +149,17 @@ $(document).ready(function (){
             if(appliedCards.length < 1){
                 currentCardNumber.text(0);
                 $("#card").fadeOut(100);
+                $("#cycle").css("marginTop", "0px");
             } else {
                 $("#card").show();
                 currentCardNumber.text(1);
+                $("#cycle").css("marginTop", "-40px");
             }
             allCards = appliedCards;
             modalFadeOut($("#searchDeckModal"));
             searchDeckOpen = false;
         });
     });
-
-
-
-
 
 
 
