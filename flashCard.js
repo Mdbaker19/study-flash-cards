@@ -104,29 +104,31 @@ $(document).ready(function (){
 
     //=======SEARCH DECK==========//
     let searchDeckOpen = false;
-    let searchOptionsSet = new Set();
     $("#searchDeck").on("click", function(){
+        $(this).css("display", "none");// ADDED TEMPORARILY DUE TO FILTERING CAUSING SOME WEIRD ISSUES WHEN TRYING TO FILTER FOR A SECOND TIME
+        let searchOptionsSet = [];
         searchDeckOpen = true;
         $("#searchDeckModal").css("display", "flex");
         $("#closeSearchDeck").on("click", function (){
            modalFadeOut($("#searchDeckModal"));
-           searchOptionsSet.clear();
         });
 
         $(".languageOptions").on("click", function (){
            let languageSelection = $(this)[0].innerText;
-            console.log($(this));
             if($(this).hasClass("languageOptionsClicked")){
                $(this).removeClass("languageOptionsClicked");
            } else {
                $(this).addClass("languageOptionsClicked");
            }
-           if(!searchOptionsSet.has(languageSelection)){
-               searchOptionsSet.add(languageSelection);
+
+
+
+           if(!searchOptionsSet.includes(languageSelection)){
+               searchOptionsSet.push(languageSelection);
            } else {
-               searchOptionsSet.delete(languageSelection);
+               let index = searchOptionsSet.indexOf(languageSelection);
+               searchOptionsSet.splice(index, 1);
            }
-            console.log("filtered categories include");
             console.log(searchOptionsSet);
         });
 
@@ -165,6 +167,7 @@ $(document).ready(function (){
 
     let addModalOpen = false;
     $("#addCard").on("click", function (){
+        $(this).css("display", "none");//ADDED TEMPORARILY TO FORCE A REFRESH TO ADD ANOTHER CARD DUE TO THERE BEING ISSUES WITH CARDS DUPLICATING
         addModalOpen = true;
         $("#newCardModal").css("display", "flex");
         $("#closeNewCardModal").on("click", function (){
