@@ -333,8 +333,8 @@ pre{
 .flip-card-front {
     height: 350px;
     width: 100%;
-    background-color: darkgoldenrod;
-    color: white;
+    background-color: white;
+    color: black;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
     overflow: scroll;
@@ -343,17 +343,17 @@ pre{
     width: .25rem;
 }
 .flip-card-front::-webkit-scrollbar-track{
-    background: darkgoldenrod;
+    background: white;
 }
 .flip-card-front::-webkit-scrollbar-thumb{
-    background: darkgoldenrod;
+    background: white;
 }
 
 .flip-card-back {
     height: 350px;
     width: 100%;
-    background-color: darkgoldenrod;
-    color: white;
+    background-color: white;
+    color: black;
     transform: perspective(250px) rotateY(180deg);
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
