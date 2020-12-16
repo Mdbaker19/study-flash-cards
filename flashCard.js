@@ -11,7 +11,7 @@ $(document).ready(function (){
             baseAllCards = data;
             console.log(data);
             $("#card").html(render(allCards[0]));
-            hljs.initHighlighting();
+            // hljs.initHighlighting();
             currentCardNumber.text(1);
             cardDeckSize.text(allCards.length);
         });
