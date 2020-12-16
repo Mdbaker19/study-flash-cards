@@ -293,7 +293,8 @@ button:hover{
 }
 
 pre{
-
+    font-size: 16px;
+    font-family: "lato", sans-serif;
 }
 
 

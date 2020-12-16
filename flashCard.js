@@ -109,12 +109,17 @@ $(document).ready(function (){
 
     $("#searchDeck").on("click", function() {
         searchOptionsSet = [];
+        $(".languageOptions").toArray().forEach(ele => {
+            if(ele.classList.contains("languageOptionsClicked")){
+                ele.classList.remove("languageOptionsClicked");
+            }
+        });
         searchDeckOpen = true;
-        $(this).css("display", "none");
         $("#searchDeckModal").css("display", "flex");
         $("#closeSearchDeck").on("click", function () {
             modalFadeOut($("#searchDeckModal"));
         });
+    });
         $(".languageOptions").on("click", function () {
             languageSelection = $(this)[0].innerText;
             if ($(this).hasClass("languageOptionsClicked")) {
@@ -131,7 +136,6 @@ $(document).ready(function (){
             }
             console.log(searchOptionsSet);
         });
-    });
 
 
     $("#applyDeckFilter").on("click", function (){
@@ -184,7 +188,7 @@ $(document).ready(function (){
     });
 
     $("#submitNewCard").on("click", function (){
-        addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val().replace(/</g, "&lt").replace(/>/g, "&lt"), newCardCode.val().replace(/</g, "&lt").replace(/>/g, "&lt"))).then(recallCards);
+        addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val().replace(/</g, "&lt").replace(/>/g, "&gt"), newCardCode.val().replace(/</g, "&lt").replace(/>/g, "&gt"))).then(recallCards);
         modalFadeOut($("#newCardModal"));
     });
 
