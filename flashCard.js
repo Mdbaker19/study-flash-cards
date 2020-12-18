@@ -301,4 +301,16 @@ $(document).ready(function (){
             $("#readCard").text("Read Card");
         }
     });
+
+    $(window).scroll(function () {
+        const currentPos = $(this).scrollTop();
+        if (currentPos >= parseFloat($('#doubleClick').css('height'))) {
+            $('#header').css({position: 'fixed', 'background-color': 'rgba(0,0,0,.5)'});
+            $('.side-bar').css({top: 0});
+        } else {
+            $('#header').css({position: 'static', 'background-color': '#0bd6d6'});
+            $('.side-bar').offset({top: 10});
+        }
+    })
+    // thank Connor for this!
 });
