@@ -264,7 +264,6 @@ $(document).ready(function (){
     currentCardNumber.text(1);
     cardDeckSize.text(allCards.length);
     let baseAllCards = cards;
-    $("#card").html(render(allCards[0]));
 
 
     // fetch(baseURL)
@@ -304,15 +303,20 @@ $(document).ready(function (){
         modalObj.fadeOut(500);
     }
 
-    let count = 0;
-    $("#nextCard").on("click", function (){
-        count++;
-        if(count > allCards.length - 1) {
-            count = 0;
-        }
-        currentCardNumber.text(count+1);
-        $("#card").html((render(allCards[count])));
-    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     function render(cardObj){
@@ -332,7 +336,7 @@ $(document).ready(function (){
 
 
 
-        return `<div class="flip-card">
+        return `<div class="flip-card card">
                    <div class="flip-card-inner">
                        <div class="flip-card-front">
                            <button id="edit">Edit</button>
@@ -575,7 +579,93 @@ $(document).ready(function (){
             $('#header').css({position: 'static', 'background-color': '#0bd6d6'});
             $('.side-bar').offset({top: 10});
         }
-    })
+    });
+
+
+
+
+
+
+
+    let count = 0;
+    let cardLoc = document.getElementsByClassName("cards");
+
+    for(let i = 0; i < allCards.length; i++){
+        cardLoc[0].insertAdjacentHTML( "afterbegin", render(allCards[i]));
+    }
+    Array.from(cardLoc).forEach(card => {
+        Array.from(card.children).forEach((card, ind) => {
+            if(ind > 0) {
+                card.classList.add("hidden");
+            }
+                card.classList.add(ind.toString());
+        });
+    });
+
+    let oldId = null;
+
+    let slideCards = 0;
+    $('#nextCard').click(function() {
+        let currentId = slideCards;
+        slideCards++;
+        if(slideCards >= allCards.length){
+            slideCards = 0;
+        }
+        $('.card').each(function(index) {
+            if(index === slideCards) {
+                window.setTimeout(function () {
+                    $('.card').eq(index).removeClass('hidden');
+                }, 100);
+            } else {
+                window.setTimeout(function() {
+                    $('.card').eq(index).addClass('hidden');
+                },  100);
+            }
+        });
+        currentCardNumber.text(slideCards+1);
+        oldId = currentId;
+    });
+
+
+
+
+
+
+
+    // if (currentId < oldId) { // item is hidden
+    //     var timing = $('.card.hidden').length * 100;
+    //     $('.card').each(function(index) {
+    //         if (index > (currentId - 1 ) || index == (currentId - 1)) {
+    //             window.setTimeout(function() {
+    //                 $('.card').eq(index).removeClass('hidden');
+    //             }, timing - (index * 100));
+    //         }
+    //     });
+    // } else {
+    //     $('.card').each(function(index) {
+    //         if (index < (currentId - 1)) {
+    //             window.setTimeout(function() {
+    //                 $('.card').eq(index).addClass('hidden');
+    //             }, index * 100);
+    //         }
+    //     });
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
