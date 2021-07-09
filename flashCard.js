@@ -96,11 +96,7 @@ $(document).ready(function (){
                            <h6>${cardObj.category}</h6>
                            <h1>${cardObj.title}</h1>
                            <pre>${cardObj.question}</pre>
-        <pre>
-  <code>
-  ${cardObj.code}
-  </code>
-        </pre>
+                              <pre style="display: flex"><code style="width: 100%"><p style="text-align: left; display: inline-block;">${cardObj.code.trim()}</p></code></pre>
                        </div>
                        <div class="flip-card-back">
                            <h1>Answer</h1>
