@@ -1,294 +1,45 @@
 $(document).ready(function (){
-    // ====== UNTIL GLITCH SERVER ISSUE IS FIGURED OUT
-    let cards = [
-        {
-            "title": "Java",
-            "question": "Define Java Access\nModifiers, List the\ndifferent Types\n            ",
-            "answer": "Specifies the visibility of the fields of a class Public, Private and Protected",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 23
-        },
-        {
-            "title": "Java OOP",
-            "category": "Java",
-            "code": "\n            ",
-            "question": "Define Inheritance\n            ",
-            "answer": "A class may have a direct parent class it extends/inherits instance fields from, allows for subcategories of Java objects. Enables code reusability especially when we need to create slight variations of a specific class",
-            "id": 24
-        },
-        {
-            "title": "Java",
-            "question": "How are child and \nparent classes\nreferred to\n            ",
-            "answer": "A parent class may be referred to as a \"superclass\" or \"base class\", a child class may be referred to as a \"subclass\"",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 25
-        },
-        {
-            "title": "Java",
-            "question": "Can the value of \nan instance\nfield be changed\nin a subclass?\n            ",
-            "answer": "Yes",
-            "category": "Java",
-            "code": "public class Dog{\n  public boolean isCute = false;\n}\n\npublic class Pug{\n  public boolean isCute = true;\n}\n            ",
-            "id": 27
-        },
-        {
-            "title": "Java Classes",
-            "question": "Can a class have\nmore than one\nancestor?\n            ",
-            "answer": "A class may extend from one and only one direct parent class. A class may extend from a class that in turn extends from another class, and may continue indefinitely",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 28
-        },
-        {
-            "title": "Java Classes",
-            "question": "Is a subclass stuck\nwith only what it\ninherits from \nits parent?\n            ",
-            "answer": "No! A subclass may add any number of fields. Additionally, unless a method is marked as \"final\", a subclass may redefine the method (override it)",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 29
-        },
-        {
-            "title": "Java OOP",
-            "question": "What is polymorphism\nin Java?\n            ",
-            "answer": "One thing, many forms.. 1. An object that may be of any type it extends or implements. 2. Static polymorphism (complie time) : method overloading. 3. Dynamic polymorphism (run time) : method overriding",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 30
-        },
-        {
-            "title": "Java OOP",
-            "question": "What are the \nbenefits of an OOP\nlanguage?\n            ",
-            "answer": "Re-usability, If a user wants similar functionality in multiple classes, it can be done through inheritance, Code Maintenance, Security with the use of data hiding and abstraction mechanisms, Design Benefits through longer and extensive design phase resulting in better design and fewer flaws",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 32
-        },
-        {
-            "title": "Static Keyword",
-            "category": "Java",
-            "code": "public class Maths{\n  public static double pie = 3.1415;\n    }   ",
-            "question": "If you were writing code in a different class, \nhow would you access the property pie?\n            ",
-            "answer": "Static variables belong to the entire class instead of any 1 instance of the class. You refer to the entire class and use dot notation to access the property. Maths.pie in this case.",
-            "id": 33
-        },
-        {
-            "title": "Java stuff",
-            "question": "Remember this Javascript? What in Java effectively does the same thing?\n            ",
-            "answer": "A constructor. You feed a constructor arguments(usually) it sets the properties of an object and returns that object.",
-            "category": "Java",
-            "code": "function createBook(bookTitle, bookAuthorFirstName, bookAuthorLastName) {\n        var bookStuff = {\n                title: bookTitle,\n                author: {\n            firstName: bookAuthorFirstName,\n                    lastName: bookAuthorLastName\n        }\n        };\n        return bookStuff;\n    }",
-            "id": 35
-        },
-        {
-            "title": "Inheritance ",
-            "question": "Why does bob.sayHello() work but jim.doWork() doesn't?\n            ",
-            "answer": "Inheritance flows one way. A subclass will inherit methods and properties from the parent class but the parent class does not inherit from classes that extend it.",
-            "category": "Java",
-            "code": "    public class Person{\n        public String name;\n\n        public void sayHello(){\n            System.out.println(this.name + \" says hello.\");\n        }\n    }\n\n    public class Employee extends Person{\n        public void doWork(){\n            System.out.println(this.name + \" writes code.\");\n        }\n    }\n    Person jim = new Person(\"Jim\");\n    Employee bob = new Employee(\"Bob\");\n            ",
-            "id": 38
-        },
-        {
-            "title": "Java OOP",
-            "category": "Java",
-            "code": "public class Person{\n        private String name;\n\n        public Person(String name) {\n            this.name = name;\n        }\n        public String getName() {\n            return name;\n        }\n    }\n    public class Employee extends Person{\n        public Employee(String name) {\n            super(name);\n        }\n        public void soutName(){\n            System.out.println(this.name);\n        }\n    }    ",
-            "question": "In the employee class this.name doesn't work because of the private access modifier.\n How can you access the name property without changing the access modifier?\n            ",
-            "answer": "this.getName(). name is private but the getter is public.",
-            "id": 39
-        },
-        {
-            "title": "Java OOP",
-            "question": "Briefly describe the 4 pillars\nof OOP\n            ",
-            "answer": "Inheritance: sharing of information, Encapsulation: Grouping of information, Abstraction: Hiding of information, Polymorphism: Redefining of information",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 40
-        },
-        {
-            "title": "Java Constructor",
-            "question": "What is a Constructor\n            ",
-            "answer": "A method that is called when an object is created",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 41
-        },
-        {
-            "title": "Java keywords",
-            "question": "Define the \"super\" keyword\n            ",
-            "answer": "The super keyword allows a subclass to use the parent class implementation of a given method",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 42
-        },
-        {
-            "title": "Java OOP",
-            "question": "Define Polymorphism\n            ",
-            "answer": "Polymorphism is the concept of treating subclass objects as if they were of the superclass type. In other words an object that can be assigned to more than one class can be called polymorhpic. Provides flexibility, allows for the use of one class with multiple implementations.",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 43
-        },
-        {
-            "title": "Java keywords",
-            "question": "Define the \"Final\" keyword\n            ",
-            "answer": "The final keyword can be used to prevent reassignment, inheritance or overriding. This keyword can also be used with method parameters",
-            "category": "Java",
-            "code": "\n            ",
-            "id": 44
-        },
-        {
-            "title": "HTML attributes",
-            "category": "HTML",
-            "code": "\n&ltform ____ action=\"liquorStore\"&gt       ",
-            "question": "\nWhat would you put into this form tag to send a request in the URL header.           ",
-            "answer": "method=\"POST\"",
-            "id": 45
-        },
-        {
-            "title": "Java ",
-            "category": "Java",
-            "code": "\n    1. Use the extends keyword\n2. Use the implements keyword\n  3. Use Super Keyword      ",
-            "question": "\n       How can a subclass use the superclass \nimplementation of a method after it has been overridden     ",
-            "answer": "3",
-            "id": 46
-        },
-        {
-            "title": "Java Lists",
-            "question": "What is the output of the\nfollowing code?\n            ",
-            "answer": "[1, 0, 4, 5]",
-            "category": "Java",
-            "code": "ArrayList&ltInteger&gt nums = new ArrayList&lt&gt(Arrays.asList(1, 0));\nnums.add(4);\nnums.add(5);            \nSystem.out.println(nums);",
-            "id": 47
-        },
-        {
-            "title": "Java",
-            "question": "What is a Data Structure            ",
-            "answer": "A way of storing and organizing data for effective access and modification",
-            "category": "Java",
-            "code": "",
-            "id": 48
-        },
-        {
-            "title": "Java",
-            "question": "How would you link an Interface to another Interface?            ",
-            "answer": "with the \"extends\" keyword",
-            "category": "Java",
-            "code": "",
-            "id": 49
-        },
-        {
-            "title": "Java Lists",
-            "question": "What is the output of the following code?         ",
-            "answer": "2",
-            "category": "Java",
-            "code": "ArrayList&ltInteger&gt numbers = new ArrayList&lt&gt();\nnumbers.add(10);\nnumbers.add(10);\nnumbers.add(11);\nnumbers.add(11);\nSystem.out.println(numbers.indexOf(11));",
-            "id": 50
-        },
-        {
-            "title": "Java Lists",
-            "question": "How would you return the length of a Java Array List?",
-            "answer": "\"arrayName\" . size()",
-            "category": "Java",
-            "code": "",
-            "id": 51
-        },
-        {
-            "title": "Java Lists",
-            "category": "Java",
-            "code": "",
-            "question": "How would you add an element into a specific index of an Array List?",
-            "answer": "with the .add method overloaded with the specified index followed by the element",
-            "id": 52
-        },
-        {
-            "title": "Java Lists",
-            "question": "What is the return type of ArrayList.contains();?",
-            "answer": "A boolean value, either true or false if the given element is in the ArrayList",
-            "category": "Java",
-            "code": "",
-            "id": 53
-        },
-        {
-            "title": "Java Lists",
-            "question": "What are the different return types from ArrayList.remove();?",
-            "answer": "A boolean if an object is passed in as a parameter, ArrayList.remove(\"this\"); And the removed item when an index is passed in. ArrayList.remove(1); returns the element at index 1",
-            "category": "Java",
-            "code": "",
-            "id": 54
-        },
-        {
-            "title": "Java Collections",
-            "category": "Java",
-            "code": "",
-            "question": "What is a Hash Map?",
-            "answer": "A hash map is a data structure for key-value pairs, implemented with the HashMap class in Java. HashMap&ltString, String&gt usernames = new HashMap&lt&gt(); (Similar to objects in JS)",
-            "id": 55
-        },
-        {
-            "title": "Java Collections",
-            "question": "True or false:\nThe keys and values of a Hash map must \nbe of the same type, and all keys and all\n values must be of the same type",
-            "answer": "False. the keys and values of a Hash map can be of different types. as long as all the keys themselves are the same type and all the values are of the same type themselves as well",
-            "category": "Java",
-            "code": "",
-            "id": 56
-        },
-        {
-            "title": "Java Collections",
-            "category": "Java",
-            "code": "HashMap&ltString, String&gt usernames = new HashMap&lt&gt();\nusernames.put();\nusernames.get();\nusernames.containsKey();\nusernames.containsValue();",
-            "question": "Briefly describe these Hash map methods.",
-            "answer": ".put() = set a key value pair. .get() => return the value associated with the given key or null, .containsKey() => check if a key exists in the map. .containsValue() => check if a value exists in the map",
-            "id": 57
-        },
-        {
-            "title": "Java Lists",
-            "question": "Briefly describe the \nfollowing ArrayList Methods\n            ",
-            "answer": ".set(0, \"this\"); => 'sets' \"this\" into index 0; .lastIndexOf(); returns the first found index of the given item, or -1; .remove(); => remove the first occurrence of an item or an item at a given index. isEmpty() => check if a list is empty",
-            "category": "Java",
-            "code": ".lastIndexOf();\n.remove();\n.isEmpty();\n.set();\n            ",
-            "id": 58
-        }
-    ];
 
 
-
-
-
-
-
-    let allCards = cards;
+    let allCards = [];
     let setCurrentCardContent;
     let currentCardNumber = $("#currentCardNumber");
     let cardDeckSize = $("#deckSizeNumber");
     currentCardNumber.text(1);
     cardDeckSize.text(allCards.length);
-    let baseAllCards = cards;
-    $("#card").html(render(allCards[0]));
+    let baseAllCards = [];
 
 
-    // fetch(baseURL)
-    //     .then(res => {
-    //         res.json()
-    //     .then(data => {
-    //         $("#loadingArea").fadeOut(100);
-    //         allCards = data;
-    //         baseAllCards = data;
-    //         console.log(data);
-    //         $("#card").html(render(allCards[0]));
-    //         // hljs.initHighlighting();
-    //         currentCardNumber.text(1);
-    //         cardDeckSize.text(allCards.length);
-    //     })}).catch(err => console.error(err));
-    //
-    // function recallCards(){
-    //     fetch(baseURL)
-    //         .then( res => res.json())
-    //         .then( data => {
-    //             allCards = data;
-    //             cardDeckSize.text(allCards.length);
-    //         }).catch(err => console.error(err));
-    // }
+    fetch(baseURL)
+        .then(res => {
+            res.json()
+        .then(data => {
+            $("#loadingArea").fadeOut(100);
+            allCards = makeCardArr(data);
+            baseAllCards = makeCardArr(data);
+            console.log(allCards);
+            $("#card").html(render(allCards[0]));
+            // hljs.initHighlighting();
+            currentCardNumber.text(1);
+            cardDeckSize.text(allCards.length);
+        })}).catch(err => console.error(err));
+
+    function recallCards(){
+        fetch(baseURL)
+            .then( res => res.json())
+            .then( data => {
+                allCards = data;
+                cardDeckSize.text(allCards.length);
+            }).catch(err => console.error(err));
+    }
+
+    function makeCardArr(objSet) {
+        let arr = [];
+        for(const o in objSet) {
+            arr.push(objSet[o]);
+        }
+        return arr;
+    }
 
     function createNewCard(title, question, answer, category, code){
         return {
@@ -304,18 +55,24 @@ $(document).ready(function (){
         modalObj.fadeOut(500);
     }
 
-    let count = 0;
-    $("#nextCard").on("click", function (){
-        count++;
-        if(count > allCards.length - 1) {
-            count = 0;
-        }
-        currentCardNumber.text(count+1);
-        $("#card").html((render(allCards[count])));
-    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     function render(cardObj){
+        if(!cardObj) return;
         if(cardObj.code === "undefined"){
             cardObj.code = "";
         }
@@ -332,10 +89,10 @@ $(document).ready(function (){
 
 
 
-        return `<div class="flip-card">
+        return `<div class="flip-card card">
                    <div class="flip-card-inner">
                        <div class="flip-card-front">
-                           <button id="edit">Edit</button>
+<!--                           <button id="edit">Edit</button>-->
                            <h6>${cardObj.category}</h6>
                            <h1>${cardObj.title}</h1>
                            <pre>${cardObj.question}</pre>
@@ -458,54 +215,54 @@ $(document).ready(function (){
 
 
     //=======EDIT AND DELETE FUNCTIONS===========//
-    let editModalOpen = false;
-    let currentID;
-    let currentCardHTML;
-    let editTitleInput = $("#editCardTitle");
-    let editCategoryInput = $("#editCardCategory");
-    let editCodeInput = $("#editCardCode");
-    let editQuestionInput = $("#editCardQuestion");
-    let editAnswerInput = $("#editCardAnswer");
-    $("body").on("click", "#edit", function () {
-        editModalOpen = true;
-        currentID = $("#card").children()[0].lastChild.previousSibling.innerText;
-        currentCardHTML = $(this).parent();
-        let currentCard = allCards[count];
-
-        editTitleInput.val(currentCard.title);
-        editCategoryInput.val(currentCard.category);
-        editCodeInput.val(currentCard.code);
-        editQuestionInput.val(currentCard.question);
-        editAnswerInput.val(currentCard.answer);
-
-        $("#editCardModal").css("display", "flex");
-        $("#closeEditModal").on("click", function () {
-            modalFadeOut($("#editCardModal"));
-        });
-    });
-
-    $("#submitEditCard").on("click", function () {
-        let newCardObj = {
-            title: editTitleInput.val(),
-            category: editCategoryInput.val(),
-            code: editCodeInput.val().replace(/</g, "&lt").replace(/>/g, "&gt"),
-            question: editQuestionInput.val().replace(/</g, "&lt").replace(/>/g, "&gt"),
-            answer: editAnswerInput.val(),
-            id: currentID
-        }
-        currentCardHTML.html((render(newCardObj)));
-        editCard(newCardObj).then( () => {
-            recallCards();
-        });
-        modalFadeOut($("#editCardModal"));
-    });
-
-    $("#deleteCard").on("click", function(){
-        deleteCard(currentID).then( () => {
-            $("#card").html((render(allCards[count - 1])));
-        });
-        modalFadeOut($("#editCardModal"));
-    });
+    // let editModalOpen = false;
+    // let currentID;
+    // let currentCardHTML;
+    // // let editTitleInput = $("#editCardTitle");
+    // // let editCategoryInput = $("#editCardCategory");
+    // // let editCodeInput = $("#editCardCode");
+    // // let editQuestionInput = $("#editCardQuestion");
+    // // let editAnswerInput = $("#editCardAnswer");
+    // $("body").on("click", "#edit", function () {
+    //     editModalOpen = true;
+    //     currentID = $("#card").children()[0].lastChild.previousSibling.innerText;
+    //     currentCardHTML = $(this).parent();
+    //     let currentCard = allCards[count];
+    //
+    //     // editTitleInput.val(currentCard.title);
+    //     // editCategoryInput.val(currentCard.category);
+    //     // editCodeInput.val(currentCard.code);
+    //     // editQuestionInput.val(currentCard.question);
+    //     // editAnswerInput.val(currentCard.answer);
+    //
+    //     $("#editCardModal").css("display", "flex");
+    //     $("#closeEditModal").on("click", function () {
+    //         modalFadeOut($("#editCardModal"));
+    //     });
+    // });
+    //
+    // $("#submitEditCard").on("click", function () {
+    //     let newCardObj = {
+    //         title: editTitleInput.val(),
+    //         category: editCategoryInput.val(),
+    //         code: editCodeInput.val().replace(/</g, "&lt").replace(/>/g, "&gt"),
+    //         question: editQuestionInput.val().replace(/</g, "&lt").replace(/>/g, "&gt"),
+    //         answer: editAnswerInput.val(),
+    //         id: currentID
+    //     }
+    //     currentCardHTML.html((render(newCardObj)));
+    //     editCard(newCardObj).then( () => {
+    //         recallCards();
+    //     });
+    //     modalFadeOut($("#editCardModal"));
+    // });
+    //
+    // $("#deleteCard").on("click", function(){
+    //     deleteCard(currentID).then( () => {
+    //         $("#card").html((render(allCards[count - 1])));
+    //     });
+    //     modalFadeOut($("#editCardModal"));
+    // });
 
 
 
@@ -575,7 +332,83 @@ $(document).ready(function (){
             $('#header').css({position: 'static', 'background-color': '#0bd6d6'});
             $('.side-bar').offset({top: 10});
         }
-    })
+    });
+
+
+
+
+
+
+
+    let count = 0;
+    let cardLoc = document.getElementsByClassName("cards");
+
+    for(let i = 0; i < allCards.length; i++){
+        cardLoc[0].insertAdjacentHTML( "afterbegin", render(allCards[i]));
+    }
+    Array.from(cardLoc).forEach(card => {
+        Array.from(card.children).forEach((card, ind) => {
+            if(ind > 0) {
+                card.classList.add("hidden");
+            }
+                card.classList.add(ind.toString());
+        });
+    });
+
+    let oldId = null;
+
+    let slideCards = 0;
+    $('#nextCard').click(function() {
+        let currentId = slideCards;
+        slideCards++;
+        if(slideCards >= allCards.length){
+            slideCards = 0;
+        }
+        $("#card").html(render(allCards[slideCards]));
+        currentCardNumber.text(slideCards+1);
+        oldId = currentId;
+    });
+
+
+
+
+
+
+
+    // if (currentId < oldId) { // item is hidden
+    //     var timing = $('.card.hidden').length * 100;
+    //     $('.card').each(function(index) {
+    //         if (index > (currentId - 1 ) || index == (currentId - 1)) {
+    //             window.setTimeout(function() {
+    //                 $('.card').eq(index).removeClass('hidden');
+    //             }, timing - (index * 100));
+    //         }
+    //     });
+    // } else {
+    //     $('.card').each(function(index) {
+    //         if (index < (currentId - 1)) {
+    //             window.setTimeout(function() {
+    //                 $('.card').eq(index).addClass('hidden');
+    //             }, index * 100);
+    //         }
+    //     });
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
