@@ -17,7 +17,7 @@ $(document).ready(function (){
             $("#loadingArea").fadeOut(100);
             allCards = makeCardArr(data);
             baseAllCards = makeCardArr(data);
-            console.log(allCards);
+            // console.log(allCards);
             $("#card").html(render(allCards[0]));
             currentCardNumber.text(1);
             cardDeckSize.text(allCards.length);
@@ -155,7 +155,7 @@ $(document).ready(function (){
                 let index = searchOptionsSet.indexOf(languageSelection);
                 searchOptionsSet.splice(index, 1);
             }
-            console.log(searchOptionsSet);
+            // console.log(searchOptionsSet);
         });
 
 

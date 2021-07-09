@@ -9,7 +9,7 @@ const editCard = card => fetch(`${baseURL}/${card.id}`, {
 })
     .then(r => r.json())
     .then(d => {
-        console.log(`Edited card ${JSON.stringify(d)}`);
+        // console.log(`Edited card ${JSON.stringify(d)}`);
     })
     .catch(err => console.error(err));
 
@@ -21,7 +21,7 @@ const deleteCard = id => fetch(`${baseURL}/${id}`, {
 })
     .then( r => r.json())
     .then( () => {
-        console.log(`Deleted card with id: ${id}`);
+        // console.log(`Deleted card with id: ${id}`);
     })
     .catch( err => console.error(err))
 
@@ -34,7 +34,7 @@ const addCard = card => fetch(`${baseURL}`, {
 })
     .then( r => r.json())
     .then(d => {
-        console.log(`Created ${JSON.stringify(d)}`);
+        // console.log(`Created ${JSON.stringify(d)}`);
         return d;
     })
     .catch( err => console.error(err));
