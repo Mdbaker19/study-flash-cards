@@ -1,4 +1,4 @@
-const baseURL = "https://polydactyl-rapid-halloumi.glitch.me/cards";
+const baseURL = "https://flash-cards-da764-default-rtdb.firebaseio.com/cards.json";
 
 const editCard = card => fetch(`${baseURL}/${card.id}`, {
     method: "PUT",

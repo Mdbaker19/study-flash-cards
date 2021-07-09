@@ -19,6 +19,7 @@ body::-webkit-scrollbar-track{
 body::-webkit-scrollbar-thumb{
     background-color: white;
 }
+
 #main{
     width: 100vw;
     height: 60vh;
@@ -63,8 +64,8 @@ body::-webkit-scrollbar-thumb{
 #addCard{
     height: 33px;
     color: white;
+    background-color: #1D1C1C;
     font-size: 1rem;
-    background: #1D1C1C;
     margin-right: auto;
     font-family: 'Poppins', sans-serif;
     /*border: 2px solid black;*/
@@ -212,6 +213,8 @@ body::-webkit-scrollbar-thumb{
 
 #newCardTitle, #newCardCategory, #newCardQuestion, #newCardAnswer, #editCardTitle, #editCardCategory, #editCardQuestion, #editCardAnswer{
     background: lightgrey;
+    padding: 5px;
+    border-radius: 10px;
 }
 #submitNewCard, #submitEditCard{
     position: absolute;
@@ -307,7 +310,7 @@ hr{
 
 }
 .cycleThrough{
-    background-color: whitesmoke;
+    background: whitesmoke;
     color: black;
     font-weight: bold;
     border-radius: 2px;
@@ -502,7 +505,9 @@ h5 {
 
 
 
-
+#newCardModal label {
+    color: aliceblue;
+}
 
 
 
@@ -540,8 +545,6 @@ h5 {
 .card:nth-of-type(1) {
     z-index: 5;
 }
-
-
 
 
 

@@ -14,46 +14,49 @@
     <title>Flash Card Study</title>
 </head>
 <body>
-<!--    <div id="loadingArea">-->
-<!--        <h3>Loading.......</h3>-->
-<!--    </div>-->
+    <div id="loadingArea">
+        <h3>Loading.......</h3>
+    </div>
 
     <div id="newCardModal">
         <button class="closeModalButton" id="closeNewCardModal">X</button>
-        <p>Glitch server issues, can not add new cards</p>
-<!--        <label>-->
-<!--            Title-->
-<!--            <input class="newInput" id="newCardTitle">-->
-<!--        </label>-->
-<!--        <label>-->
-<!--            Category-->
-<!--            <input class="newInput" id="newCardCategory">-->
-<!--        </label>-->
-<!--        <label>-->
-<!--            Content-->
-<!--            <textarea class="newInput" id="newCardQuestion">-->
+        <label>
+            Title
+            <input class="newInput" id="newCardTitle">
+        </label>
+        <label>
+            Category
+            <select id="newCardCategory" class="newInput">
+                <option value="JS">JS</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JAVA">JAVA</option>
+            </select>
+        </label>
+        <label>
+            Content
+            <textarea class="newInput" id="newCardQuestion">
 
-<!--            </textarea>-->
-<!--        </label>-->
-<!--        <label>-->
-<!--             Code-->
-<!--             <textarea class="newInput" id="newCardCode">-->
+            </textarea>
+        </label>
+        <label>
+             Code
+             <textarea class="newInput" id="newCardCode">
 
-<!--            </textarea>-->
-<!--        </label>-->
-<!--        <label>-->
-<!--            Answer-->
-<!--            <input class="newInput" id="newCardAnswer">-->
-<!--        </label>-->
-<!--        <button id="submitNewCard">Submit</button>-->
+            </textarea>
+        </label>
+        <label>
+            Answer
+            <input class="newInput" id="newCardAnswer">
+        </label>
+        <button id="submitNewCard">Submit</button>
     </div>
 
-    <div id="editCardModal">
-        <div id="editAndDeleteButtons">
-            <button id="deleteCard">Delete</button>
-            <button class="closeModalButton" id="closeEditModal">X</button>
-        </div>
-        <p>Glitch server issues, currently can not edit cards</p>
+<!--    <div id="editCardModal">-->
+<!--        <div id="editAndDeleteButtons">-->
+<!--            <button id="deleteCard">Delete</button>-->
+<!--            <button class="closeModalButton" id="closeEditModal">X</button>-->
+<!--        </div>-->
 <!--        <label>-->
 <!--            Title-->
 <!--            <input id="editCardTitle">-->
@@ -65,13 +68,13 @@
 <!--        <label>-->
 <!--            Content-->
 <!--            <textarea id="editCardQuestion">-->
-
+<!---->
 <!--            </textarea>-->
 <!--        </label>-->
 <!--        <label>-->
 <!--            Code-->
 <!--            <textarea id="editCardCode">-->
-
+<!---->
 <!--            </textarea>-->
 <!--        </label>-->
 <!--        <label>-->
@@ -79,7 +82,8 @@
 <!--            <input id="editCardAnswer">-->
 <!--        </label>-->
 <!--        <button id="submitEditCard">Submit</button>-->
-    </div>
+<!--        <h3 style="color: aliceblue; text-align: center">Let me know if something needs to be changed</h3>-->
+<!--    </div>-->
 
     <div id="searchDeckModal">
         <button id="closeSearchDeck">X</button>
