@@ -19,7 +19,6 @@ $(document).ready(function (){
             baseAllCards = makeCardArr(data);
             console.log(allCards);
             $("#card").html(render(allCards[0]));
-            // hljs.initHighlighting();
             currentCardNumber.text(1);
             cardDeckSize.text(allCards.length);
         })}).catch(err => console.error(err));
