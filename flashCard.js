@@ -28,7 +28,8 @@ $(document).ready(function (){
         fetch(baseURL)
             .then( res => res.json())
             .then( data => {
-                allCards = data;
+                allCards = makeCardArr(data);
+                baseAllCards = makeCardArr(data);
                 cardDeckSize.text(allCards.length);
             }).catch(err => console.error(err));
     }
@@ -208,9 +209,28 @@ $(document).ready(function (){
         newCardCode = $("#newCardCode");
     });
 
-    $("#submitNewCard").on("click", function (){
-        addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(), newCardCategory.val().replace(/</g, "&lt").replace(/>/g, "&gt"), newCardCode.val().replace(/</g, "&lt").replace(/>/g, "&gt"))).then(recallCards);
-        modalFadeOut($("#newCardModal"));
+    $("#submitNewCard").on("click", () => {
+        if((newCardQuestion.val().length < 1 || newCardQuestion.val().length < 1) || newCardAnswer.val().length < 1) {
+            Array.from($(".newInput")).forEach(ele => {
+                if(ele.value.trim().length < 1) {
+                    ele.classList.add("error");
+                } else {
+                    ele.classList.remove("error");
+                }
+            });
+            $("#newCardCode").removeClass("error");
+            return;
+        }
+        addCard(createNewCard(newCardTitle.val(), newCardQuestion.val(), newCardAnswer.val(),
+            newCardCategory.val().replace(/</g, "&lt").replace(/>/g, "&gt"),
+            newCardCode.val().replace(/</g, "&lt").replace(/>/g, "&gt")))
+            .then(() => {
+                recallCards();
+                Array.from($(".newInput")).forEach(ele => {
+                    ele.classList.remove("error");
+                });
+                modalFadeOut($("#newCardModal"));
+            });
     });
 
 

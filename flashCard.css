@@ -435,9 +435,11 @@ h5 {
     background: white;
 }
 
+
 .flip-card-back {
     height: 350px;
     width: 100%;
+    padding: 0 3rem;
     background-color: white;
     color: black;
     transform: perspective(250px) rotateY(180deg);
@@ -549,3 +551,6 @@ h5 {
 
 
 
+.error {
+    background-color: #e6a2ad !important;
+}
