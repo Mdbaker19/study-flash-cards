@@ -192,7 +192,9 @@ $(document).ready(function (){
     let newCardAnswer;
     let newCardCode;
     $("#addCard").on("click", function (){
-        addModalOpen = true;
+        let pass = prompt("Password...");
+        if(pass === "js") addModalOpen = true;
+        else return;
         $("#newCardModal").css("display", "flex");
         $("#closeNewCardModal").on("click", function (){
             modalFadeOut($("#newCardModal"));
@@ -205,7 +207,7 @@ $(document).ready(function (){
     });
 
     $("#submitNewCard").on("click", () => {
-        if((newCardQuestion.val().length < 1 || newCardQuestion.val().length < 1) || newCardAnswer.val().length < 1) {
+        if((newCardQuestion.val().trim().length < 1 || newCardQuestion.val().trim().length < 1) || newCardAnswer.val().trim().length < 1) {
             Array.from($(".newInput")).forEach(ele => {
                 if(ele.value.trim().length < 1) {
                     ele.classList.add("error");
